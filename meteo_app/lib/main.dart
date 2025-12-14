@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:meteo_app/services/meteo_services.dart';
 import 'package:meteo_app/models/meteo.dart';
+import 'package:geolocator/geolocator.dart';
 
 void main() {
   runApp(const MeteoApp());
