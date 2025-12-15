@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:geolocator/geolocator.dart';
 import '../models/meteo.dart';
 
 class MeteoServices {
@@ -18,4 +19,26 @@ class MeteoServices {
     }
   }
 
+  Future<Position> _getPosition() async {
+    LocationPermission autoriwed;
+    bool serviceEnable;
+
+    serviceEnable = await Geolocator.isLocationServiceEnabled();
+    if(serviceEnable){
+      autoriwed = await Geolocator.checkPermission();
+      if(autoriwed != LocationPermission.denied){
+        if(autoriwed == LocationPermission.deniedForever){
+          throw Exception("Permission de récupération de localisation refusée définitivement.");
+        }
+        return await Geolocator.getCurrentPosition();
+      }else{
+        autoriwed = await Geolocator.requestPermission();
+        if(autoriwed == LocationPermission.denied){
+          throw Exception("Vous n'avez pas autorisé la récupération de votre localisation.");
+        }
+      }
+    }else{
+      throw Exception("Votre localisation est désactivé.");
+    }
+  }
 }
