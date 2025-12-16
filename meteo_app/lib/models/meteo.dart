@@ -1,12 +1,12 @@
 class Meteo{
   final String location;
-  final double temparature;
+  final double temperature;
   final String measure;
   final String description;
 
   const Meteo({
     required this.location,
-    required this.temparature,
+    required this.temperature,
     required this.measure,
     required this.description,
   });
@@ -14,7 +14,7 @@ class Meteo{
   factory Meteo.fromJson(Map<String,dynamic> json){
     return Meteo(
       location: json['name'], 
-      temparature: json['main']['temp'].toDouble(), 
+      temperature: json['main']['temp'].toDouble(), 
       measure: "°C", 
       description: json['weather'][0]['description']
     );

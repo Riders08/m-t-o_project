@@ -19,26 +19,38 @@ class MeteoServices {
     }
   }
 
-  Future<Position> _getPosition() async {
-    LocationPermission autoriwed;
-    bool serviceEnable;
-
-    serviceEnable = await Geolocator.isLocationServiceEnabled();
-    if(serviceEnable){
-      autoriwed = await Geolocator.checkPermission();
-      if(autoriwed != LocationPermission.denied){
-        if(autoriwed == LocationPermission.deniedForever){
-          throw Exception("Permission de récupération de localisation refusée définitivement.");
-        }
-        return await Geolocator.getCurrentPosition();
-      }else{
-        autoriwed = await Geolocator.requestPermission();
-        if(autoriwed == LocationPermission.denied){
-          throw Exception("Vous n'avez pas autorisé la récupération de votre localisation.");
-        }
-      }
+  Future<Meteo> fetchMeteoByCoordinates(double lat, double lon) async {
+    final url = '$_url?lat=$lat&lon=$lon&units=metric&appid=$_apiKey';
+    final result = await http.get(Uri.parse(url));
+    if(result.statusCode == 200){
+      return Meteo.fromJson(json.decode(result.body));
     }else{
-      throw Exception("Votre localisation est désactivé.");
+      throw Exception("Erreur lors de la récupération de votre localisation");
     }
   }
+
+  Future<Position> getPosition() async {
+    LocationPermission autoriwed;
+    bool serviceEnable;
+    serviceEnable = await Geolocator.isLocationServiceEnabled();
+
+    if(!serviceEnable){
+      throw Exception("Votre localisation est désactivé");
+    }
+
+    autoriwed = await Geolocator.checkPermission();
+    if(autoriwed == LocationPermission.denied){
+      autoriwed = await Geolocator.requestPermission();
+      if(autoriwed == LocationPermission.denied){
+        throw Exception("Vous n'avez pas donnée l'autorisation à avoir accès à votre localisation.");
+      }
+    } 
+
+    if(autoriwed == LocationPermission.deniedForever){
+      throw Exception("Permission de récupération de localisation refusée définitivement.");
+    }
+    
+    return await Geolocator.getCurrentPosition();
+  }
+
 }

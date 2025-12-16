@@ -23,7 +23,7 @@ class _MeteoAppState extends State<MeteoApp>  {
   @override
   void initState() {
     super.initState();
-    _loadMeteo();
+    _loadMeteofromLocationUser();
   }
 
   Future<void> _loadMeteo() async {
@@ -52,6 +52,24 @@ class _MeteoAppState extends State<MeteoApp>  {
     }catch(e){
       setState(() {
         _error = "Ville introuvable";
+        _isloading = false;
+      });
+    }
+  }
+
+  Future<void> _loadMeteofromLocationUser() async {
+    try{
+      final position = await _meteoServices.getPosition();
+      final result = await _meteoServices.fetchMeteoByCoordinates(position.latitude, position.longitude);
+      setState(() {
+        _meteo = result;
+        _error = null;
+        _isloading = false;
+      });
+    }catch (e) {
+      await _loadMeteo();
+      setState(() {
+        _error = "Impossibilité d'obtenir votre position";
         _isloading = false;
       });
     }
@@ -92,7 +110,7 @@ class _MeteoAppState extends State<MeteoApp>  {
                           children: 
                           [
                             Text(_meteo!.location, style: const TextStyle(fontSize: 24)), // Lieu choisi ou par default
-                            Text('${_meteo!.temparature} °C', style: const TextStyle(fontSize: 40)), // température en Celsius
+                            Text('${_meteo!.temperature} °C', style: const TextStyle(fontSize: 40)), // température en Celsius
                             Text(_meteo!.description), // Le temps sous sa forme
                           ]),
                     )
