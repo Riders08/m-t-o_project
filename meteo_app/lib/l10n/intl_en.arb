@@ -1,0 +1,5 @@
+{
+  "appTitle": "Weather",
+  "cityNotFound": "City not found",
+  "locationError": "Unable to get your location"
+}

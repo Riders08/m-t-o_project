@@ -1,0 +1,5 @@
+{
+  "appTitle": "Météo",
+  "cityNotFound": "Ville introuvable",
+  "locationError": "Impossible d'obtenir votre position"
+}
