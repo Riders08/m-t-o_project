@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:meteo_app/services/meteo_services.dart';
 import 'package:meteo_app/models/meteo.dart';
 
@@ -56,9 +57,15 @@ class _MeteoAppState extends State<MeteoApp>  {
 
   Future<void> _loadMeteofromSelectedValue(String value) async {
     try{
-      final result = await _meteoServices.fetchMeteoWithLang(value);
+      List<Location> listLocations = await locationFromAddress(value);
+      final latitude = listLocations.first.latitude;
+      final longitude = listLocations.first.longitude;
+      final country = await _meteoServices.getCountryLocation(latitude, longitude);
+      final lang = await _meteoServices.langFromCountry(country);
+      final result = await _meteoServices.fetchMeteoByCoordinatesWithLang(latitude, longitude);
       setState(() {
         _meteo = result;
+        _languageCode = lang;
         _isloading = false;
         _error = null;
       });
@@ -100,6 +107,7 @@ class _MeteoAppState extends State<MeteoApp>  {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      key: ValueKey(_languageCode),
       locale: Locale(_languageCode ?? "en"), // ?? => par défaut
       debugShowCheckedModeBanner: false,
       localizationsDelegates: const [

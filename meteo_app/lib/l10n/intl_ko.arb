@@ -1,0 +1,16 @@
+{
+  "@@locale": "ko",
+  "appTitle": "날씨",
+  "cityNotFound": "도시를 찾을 수 없습니다",
+  "locationError": "현재 위치를 가져올 수 없습니다",
+
+  "bigError": "심각한 오류",
+  "getDataAPIError": "API에서 데이터를 가져오지 못했습니다!",
+  "getLocationError": "위치 정보를 가져오는 중 오류가 발생했습니다",
+  "locationNotActive": "위치 정보가 비활성화되어 있습니다",
+  "autoriwedLocationError": "위치 정보 접근 권한이 허용되지 않았습니다.",
+  "permissionLocationError": "위치 정보 권한이 영구적으로 거부되었습니다.",
+  "getLocationTimeError": "위치 정보를 가져오는 데 시간이 너무 오래 걸렸습니다",
+
+  "place": "도시/국가"
+}

@@ -23,9 +23,29 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "appTitle": MessageLookupByLibrary.simpleMessage("Météo"),
+    "autoriwedLocationError": MessageLookupByLibrary.simpleMessage(
+      "Vous n\'avez pas donnée l\'autorisation à avoir accès à votre localisation.",
+    ),
+    "bigError": MessageLookupByLibrary.simpleMessage("Erreur énorme"),
     "cityNotFound": MessageLookupByLibrary.simpleMessage("Ville introuvable"),
+    "getDataAPIError": MessageLookupByLibrary.simpleMessage(
+      "La récupération des données de l\'API a échouée !",
+    ),
+    "getLocationError": MessageLookupByLibrary.simpleMessage(
+      "Erreur lors de la récupération de votre localisation",
+    ),
+    "getLocationTimeError": MessageLookupByLibrary.simpleMessage(
+      "La récupération de votre localisation à mis trop de temps",
+    ),
     "locationError": MessageLookupByLibrary.simpleMessage(
       "Impossible d\'obtenir votre position",
     ),
+    "locationNotActive": MessageLookupByLibrary.simpleMessage(
+      "Votre localisation est désactivé",
+    ),
+    "permissionLocationError": MessageLookupByLibrary.simpleMessage(
+      "Permission de récupération de localisation refusée définitivement.",
+    ),
+    "place": MessageLookupByLibrary.simpleMessage("Ville/Pays"),
   };
 }

@@ -1,0 +1,16 @@
+{
+  "@@locale": "pl",
+  "appTitle": "Pogoda",
+  "cityNotFound": "Nie znaleziono miasta",
+  "locationError": "Nie można pobrać Twojej lokalizacji",
+
+  "bigError": "Poważny błąd",
+  "getDataAPIError": "Nie udało się pobrać danych z API!",
+  "getLocationError": "Błąd podczas pobierania lokalizacji",
+  "locationNotActive": "Twoja lokalizacja jest wyłączona",
+  "autoriwedLocationError": "Nie udzielono pozwolenia na dostęp do lokalizacji.",
+  "permissionLocationError": "Pozwolenie na lokalizację zostało trwale odrzucone.",
+  "getLocationTimeError": "Pobranie Twojej lokalizacji zajęło za dużo czasu",
+
+  "place": "Miasto/Kraj"
+}

@@ -1,5 +1,5 @@
 // DO NOT EDIT. This is code generated via package:intl/generate_localized.dart
-// This is a library that provides messages for a en locale. All the
+// This is a library that provides messages for a ja locale. All the
 // messages from the main program should be duplicated here with the same
 // function name.
 
@@ -18,34 +18,30 @@ final messages = new MessageLookup();
 typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 
 class MessageLookup extends MessageLookupByLibrary {
-  String get localeName => 'en';
+  String get localeName => 'ja';
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-    "appTitle": MessageLookupByLibrary.simpleMessage("Weather"),
+    "appTitle": MessageLookupByLibrary.simpleMessage("天気"),
     "autoriwedLocationError": MessageLookupByLibrary.simpleMessage(
-      "You did not grant permission to access your location.",
+      "位置情報へのアクセス権限が許可されていません。",
     ),
-    "bigError": MessageLookupByLibrary.simpleMessage("Major error"),
-    "cityNotFound": MessageLookupByLibrary.simpleMessage("City not found"),
+    "bigError": MessageLookupByLibrary.simpleMessage("重大なエラー"),
+    "cityNotFound": MessageLookupByLibrary.simpleMessage("都市が見つかりません"),
     "getDataAPIError": MessageLookupByLibrary.simpleMessage(
-      "Failed to retrieve data from the API!",
+      "API からデータを取得できませんでした。",
     ),
     "getLocationError": MessageLookupByLibrary.simpleMessage(
-      "Error while retrieving your location",
+      "位置情報の取得中にエラーが発生しました",
     ),
     "getLocationTimeError": MessageLookupByLibrary.simpleMessage(
-      "Retrieving your location took too long",
+      "位置情報の取得に時間がかかりすぎました",
     ),
-    "locationError": MessageLookupByLibrary.simpleMessage(
-      "Unable to get your location",
-    ),
-    "locationNotActive": MessageLookupByLibrary.simpleMessage(
-      "Your location is disabled",
-    ),
+    "locationError": MessageLookupByLibrary.simpleMessage("現在地を取得できません"),
+    "locationNotActive": MessageLookupByLibrary.simpleMessage("位置情報が無効になっています"),
     "permissionLocationError": MessageLookupByLibrary.simpleMessage(
-      "Location permission permanently denied.",
+      "位置情報の権限が永久に拒否されました。",
     ),
-    "place": MessageLookupByLibrary.simpleMessage("City/Country"),
+    "place": MessageLookupByLibrary.simpleMessage("都市／国"),
   };
 }

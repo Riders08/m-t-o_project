@@ -1,5 +1,5 @@
 // DO NOT EDIT. This is code generated via package:intl/generate_localized.dart
-// This is a library that provides messages for a en locale. All the
+// This is a library that provides messages for a it locale. All the
 // messages from the main program should be duplicated here with the same
 // function name.
 
@@ -18,34 +18,34 @@ final messages = new MessageLookup();
 typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 
 class MessageLookup extends MessageLookupByLibrary {
-  String get localeName => 'en';
+  String get localeName => 'it';
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-    "appTitle": MessageLookupByLibrary.simpleMessage("Weather"),
+    "appTitle": MessageLookupByLibrary.simpleMessage("Meteo"),
     "autoriwedLocationError": MessageLookupByLibrary.simpleMessage(
-      "You did not grant permission to access your location.",
+      "Non hai concesso l\'autorizzazione per accedere alla tua posizione.",
     ),
-    "bigError": MessageLookupByLibrary.simpleMessage("Major error"),
-    "cityNotFound": MessageLookupByLibrary.simpleMessage("City not found"),
+    "bigError": MessageLookupByLibrary.simpleMessage("Errore grave"),
+    "cityNotFound": MessageLookupByLibrary.simpleMessage("Città non trovata"),
     "getDataAPIError": MessageLookupByLibrary.simpleMessage(
-      "Failed to retrieve data from the API!",
+      "Impossibile recuperare i dati dall\'API!",
     ),
     "getLocationError": MessageLookupByLibrary.simpleMessage(
-      "Error while retrieving your location",
+      "Errore durante il recupero della tua posizione",
     ),
     "getLocationTimeError": MessageLookupByLibrary.simpleMessage(
-      "Retrieving your location took too long",
+      "Il recupero della tua posizione ha richiesto troppo tempo",
     ),
     "locationError": MessageLookupByLibrary.simpleMessage(
-      "Unable to get your location",
+      "Impossibile ottenere la tua posizione",
     ),
     "locationNotActive": MessageLookupByLibrary.simpleMessage(
-      "Your location is disabled",
+      "La tua posizione è disattivata",
     ),
     "permissionLocationError": MessageLookupByLibrary.simpleMessage(
-      "Location permission permanently denied.",
+      "Autorizzazione alla posizione negata in modo permanente.",
     ),
-    "place": MessageLookupByLibrary.simpleMessage("City/Country"),
+    "place": MessageLookupByLibrary.simpleMessage("Città/Paese"),
   };
 }

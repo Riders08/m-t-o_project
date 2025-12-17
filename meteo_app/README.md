@@ -13,4 +13,4 @@ Réalisation d'un application météo avec API externe avec Flutter
   $ flutter get pub
 
 # Generer les fichiers de language
-  $ flutter pub run intl_utils:generate
+  $ dart run intl_utils:generate

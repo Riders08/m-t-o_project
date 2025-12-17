@@ -1,0 +1,16 @@
+{
+  "@@locale": "it",
+  "appTitle": "Meteo",
+  "cityNotFound": "Città non trovata",
+  "locationError": "Impossibile ottenere la tua posizione",
+
+  "bigError": "Errore grave",
+  "getDataAPIError": "Impossibile recuperare i dati dall'API!",
+  "getLocationError": "Errore durante il recupero della tua posizione",
+  "locationNotActive": "La tua posizione è disattivata",
+  "autoriwedLocationError": "Non hai concesso l'autorizzazione per accedere alla tua posizione.",
+  "permissionLocationError": "Autorizzazione alla posizione negata in modo permanente.",
+  "getLocationTimeError": "Il recupero della tua posizione ha richiesto troppo tempo",
+
+  "place": "Città/Paese"
+}

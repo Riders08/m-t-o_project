@@ -78,6 +78,76 @@ class S {
       args: [],
     );
   }
+
+  /// `Major error`
+  String get bigError {
+    return Intl.message('Major error', name: 'bigError', desc: '', args: []);
+  }
+
+  /// `Failed to retrieve data from the API!`
+  String get getDataAPIError {
+    return Intl.message(
+      'Failed to retrieve data from the API!',
+      name: 'getDataAPIError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error while retrieving your location`
+  String get getLocationError {
+    return Intl.message(
+      'Error while retrieving your location',
+      name: 'getLocationError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your location is disabled`
+  String get locationNotActive {
+    return Intl.message(
+      'Your location is disabled',
+      name: 'locationNotActive',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You did not grant permission to access your location.`
+  String get autoriwedLocationError {
+    return Intl.message(
+      'You did not grant permission to access your location.',
+      name: 'autoriwedLocationError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Location permission permanently denied.`
+  String get permissionLocationError {
+    return Intl.message(
+      'Location permission permanently denied.',
+      name: 'permissionLocationError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Retrieving your location took too long`
+  String get getLocationTimeError {
+    return Intl.message(
+      'Retrieving your location took too long',
+      name: 'getLocationTimeError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `City/Country`
+  String get place {
+    return Intl.message('City/Country', name: 'place', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
@@ -86,7 +156,18 @@ class AppLocalizationDelegate extends LocalizationsDelegate<S> {
   List<Locale> get supportedLocales {
     return const <Locale>[
       Locale.fromSubtags(languageCode: 'en'),
+      Locale.fromSubtags(languageCode: 'de'),
+      Locale.fromSubtags(languageCode: 'es'),
       Locale.fromSubtags(languageCode: 'fr'),
+      Locale.fromSubtags(languageCode: 'it'),
+      Locale.fromSubtags(languageCode: 'ja'),
+      Locale.fromSubtags(languageCode: 'ko'),
+      Locale.fromSubtags(languageCode: 'nl'),
+      Locale.fromSubtags(languageCode: 'pl'),
+      Locale.fromSubtags(languageCode: 'pt'),
+      Locale.fromSubtags(languageCode: 'ru'),
+      Locale.fromSubtags(languageCode: 'uk'),
+      Locale.fromSubtags(languageCode: 'zh'),
     ];
   }
 

@@ -1,0 +1,16 @@
+{
+  "@@locale": "ja",
+  "appTitle": "天気",
+  "cityNotFound": "都市が見つかりません",
+  "locationError": "現在地を取得できません",
+
+  "bigError": "重大なエラー",
+  "getDataAPIError": "API からデータを取得できませんでした。",
+  "getLocationError": "位置情報の取得中にエラーが発生しました",
+  "locationNotActive": "位置情報が無効になっています",
+  "autoriwedLocationError": "位置情報へのアクセス権限が許可されていません。",
+  "permissionLocationError": "位置情報の権限が永久に拒否されました。",
+  "getLocationTimeError": "位置情報の取得に時間がかかりすぎました",
+
+  "place": "都市／国"
+}

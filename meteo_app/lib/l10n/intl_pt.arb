@@ -1,0 +1,16 @@
+{
+  "@@locale": "pt",
+  "appTitle": "Clima",
+  "cityNotFound": "Cidade não encontrada",
+  "locationError": "Não foi possível obter sua localização",
+
+  "bigError": "Erro grave",
+  "getDataAPIError": "Falha ao recuperar dados da API!",
+  "getLocationError": "Erro ao recuperar sua localização",
+  "locationNotActive": "Sua localização está desativada",
+  "autoriwedLocationError": "Você não concedeu permissão para acessar sua localização.",
+  "permissionLocationError": "Permissão de localização negada permanentemente.",
+  "getLocationTimeError": "A recuperação da sua localização demorou muito",
+
+  "place": "Cidade/País"
+}

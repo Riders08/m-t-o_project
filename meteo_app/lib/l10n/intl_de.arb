@@ -1,0 +1,16 @@
+{
+  "@@locale": "de",
+  "appTitle": "Wetter",
+  "cityNotFound": "Stadt nicht gefunden",
+  "locationError": "Standort konnte nicht ermittelt werden",
+
+  "bigError": "Schwerwiegender Fehler",
+  "getDataAPIError": "Fehler beim Abrufen der API-Daten!",
+  "getLocationError": "Fehler beim Abrufen deines Standorts",
+  "locationNotActive": "Dein Standort ist deaktiviert",
+  "autoriwedLocationError": "Du hast keine Berechtigung erteilt, auf deinen Standort zuzugreifen.",
+  "permissionLocationError": "Standortberechtigung dauerhaft verweigert.",
+  "getLocationTimeError": "Das Abrufen deines Standorts hat zu lange gedauert",
+
+  "place": "Stadt/Land"
+}

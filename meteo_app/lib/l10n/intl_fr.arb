@@ -1,5 +1,16 @@
 {
+  "@@locale": "fr",
   "appTitle": "Météo",
   "cityNotFound": "Ville introuvable",
-  "locationError": "Impossible d'obtenir votre position"
+  "locationError": "Impossible d'obtenir votre position",
+
+  "bigError": "Erreur énorme",
+  "getDataAPIError": "La récupération des données de l'API a échouée !",
+  "getLocationError": "Erreur lors de la récupération de votre localisation",
+  "locationNotActive" : "Votre localisation est désactivé",
+  "autoriwedLocationError": "Vous n'avez pas donnée l'autorisation à avoir accès à votre localisation.",
+  "permissionLocationError": "Permission de récupération de localisation refusée définitivement.",
+  "getLocationTimeError":  "La récupération de votre localisation à mis trop de temps",
+
+  "place" : "Ville/Pays"
 }

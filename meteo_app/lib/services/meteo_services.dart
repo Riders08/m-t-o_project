@@ -4,6 +4,8 @@ import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import '../models/meteo.dart';
 
+import '../generated/l10n.dart';
+
 class MeteoServices {
   static const String _apiKey = 'b4750e8985606b88bdc8be1bfe178a73';
   static const String _url = "https://api.openweathermap.org/data/2.5/weather";
@@ -16,7 +18,7 @@ class MeteoServices {
     if(countryCode != null){
       return placemarks.first.isoCountryCode!;
     }else{
-      return "US";
+      return "FR";
     }
   }
 
@@ -24,18 +26,26 @@ class MeteoServices {
     switch(countryCode){
       case "FR" : return "fr";
       case "BE" : return "fr";
-      case "CA" : return "fr";
-      case "GB" : return "en";
-      case "EN" : return "en";
+      case "CH" : return "fr";
+      case "CA" : return "fr"; //Français
       case "US" : return "en";
-      case "IT" : return "it";
+      case "EN" : return "en";
+      case "GB" : return "en"; // Anglais
       case "ES" : return "es";
-      case "MX" : return "es";
-      case "JP" : return "ja";
-      case "DE" : return "de";
+      case "MX" : return "es"; // Espagnol
+      case "DE" : return "de"; // Allemand
+      case "IT" : return "it"; // Italien
+      case "PT" : return "pt";
+      case "BR" : return "pt"; // Portugais
+      case "NL" : return "nl"; // Néeerlandais
+      case "JP" : return "ja"; // Japonais
       case "CN" : return "zh";
-      case "TW" : return "zh";
-      default : return "en";
+      case "TW" : return "zh"; // Chinois
+      case "KR" : return "ko"; // Koréen
+      case "RU" : return "ru"; // Russe
+      case "PL" : return "pl"; // Polonais
+      case "UA" : return "uk"; // Ukrainien
+      default : return "en"; // Anglais par défault
     }
   }
 
@@ -45,7 +55,7 @@ class MeteoServices {
     if(response.statusCode == 200){
       return Meteo.fromJson(json.decode(response.body));
     }else{
-      throw Exception("Erreur énorme");
+      throw Exception(S.current.bigError);
     }
   }
 
@@ -62,7 +72,7 @@ class MeteoServices {
       final jsonData = json.decode(response.body);
       return Meteo.fromJson(jsonData);
     }else{
-      throw Exception("La récupération des données de l'API a échouée !");
+      throw Exception(S.current.getDataAPIError);
     }
   }
 
@@ -74,7 +84,7 @@ class MeteoServices {
     if(result.statusCode == 200){
       return Meteo.fromJson(json.decode(result.body));
     }else{
-      throw Exception("Erreur lors de la récupération de votre localisation");
+      throw Exception(S.current.getLocationError);
     }
   }
 
@@ -85,26 +95,26 @@ class MeteoServices {
     serviceEnable = await Geolocator.isLocationServiceEnabled();
 
     if(!serviceEnable){
-      throw Exception("Votre localisation est désactivé");
+      throw Exception(S.current.locationNotActive);
     }
 
     autoriwed = await Geolocator.checkPermission();
     if(autoriwed == LocationPermission.denied){
       autoriwed = await Geolocator.requestPermission();
       if(autoriwed == LocationPermission.denied){
-        throw Exception("Vous n'avez pas donnée l'autorisation à avoir accès à votre localisation.");
+        throw Exception(S.current.autoriwedLocationError);
       }
     } 
 
     if(autoriwed == LocationPermission.deniedForever){
-      throw Exception("Permission de récupération de localisation refusée définitivement.");
+      throw Exception(S.current.permissionLocationError);
     }
     
     return await Geolocator.getCurrentPosition()
                   .timeout(
                     const Duration(seconds: 10),
                     onTimeout: () {
-                      throw Exception("La récupération de votre localisation à mis trop de temps");
+                      throw Exception(S.current.getLocationTimeError);
                     }
                   );
   }

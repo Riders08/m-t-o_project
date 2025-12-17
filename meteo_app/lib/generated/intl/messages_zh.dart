@@ -1,5 +1,5 @@
 // DO NOT EDIT. This is code generated via package:intl/generate_localized.dart
-// This is a library that provides messages for a en locale. All the
+// This is a library that provides messages for a zh locale. All the
 // messages from the main program should be duplicated here with the same
 // function name.
 
@@ -18,34 +18,24 @@ final messages = new MessageLookup();
 typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 
 class MessageLookup extends MessageLookupByLibrary {
-  String get localeName => 'en';
+  String get localeName => 'zh';
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-    "appTitle": MessageLookupByLibrary.simpleMessage("Weather"),
+    "appTitle": MessageLookupByLibrary.simpleMessage("天气"),
     "autoriwedLocationError": MessageLookupByLibrary.simpleMessage(
-      "You did not grant permission to access your location.",
+      "您未授予访问位置的权限。",
     ),
-    "bigError": MessageLookupByLibrary.simpleMessage("Major error"),
-    "cityNotFound": MessageLookupByLibrary.simpleMessage("City not found"),
-    "getDataAPIError": MessageLookupByLibrary.simpleMessage(
-      "Failed to retrieve data from the API!",
-    ),
-    "getLocationError": MessageLookupByLibrary.simpleMessage(
-      "Error while retrieving your location",
-    ),
-    "getLocationTimeError": MessageLookupByLibrary.simpleMessage(
-      "Retrieving your location took too long",
-    ),
-    "locationError": MessageLookupByLibrary.simpleMessage(
-      "Unable to get your location",
-    ),
-    "locationNotActive": MessageLookupByLibrary.simpleMessage(
-      "Your location is disabled",
-    ),
+    "bigError": MessageLookupByLibrary.simpleMessage("重大错误"),
+    "cityNotFound": MessageLookupByLibrary.simpleMessage("未找到城市"),
+    "getDataAPIError": MessageLookupByLibrary.simpleMessage("无法从 API 获取数据！"),
+    "getLocationError": MessageLookupByLibrary.simpleMessage("获取您的位置时出错"),
+    "getLocationTimeError": MessageLookupByLibrary.simpleMessage("获取您的位置耗时过长"),
+    "locationError": MessageLookupByLibrary.simpleMessage("无法获取您的位置"),
+    "locationNotActive": MessageLookupByLibrary.simpleMessage("您的位置已禁用"),
     "permissionLocationError": MessageLookupByLibrary.simpleMessage(
-      "Location permission permanently denied.",
+      "位置权限被永久拒绝。",
     ),
-    "place": MessageLookupByLibrary.simpleMessage("City/Country"),
+    "place": MessageLookupByLibrary.simpleMessage("城市/国家"),
   };
 }
