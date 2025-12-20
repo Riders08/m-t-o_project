@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:meteo_app/services/meteo_services.dart';
+import 'package:meteo_app/services/notification_services.dart';
+
 import 'package:meteo_app/models/meteo.dart';
 
 import 'package:meteo_app/widgets/CityResearch.dart';
@@ -9,7 +11,9 @@ import 'package:meteo_app/widgets/WeatherContent.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'generated/l10n.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await NotificationServices.initNotif();
   runApp(const MeteoApp());
 }
 
@@ -22,6 +26,8 @@ class MeteoApp extends StatefulWidget  {
 
 class _MeteoAppState extends State<MeteoApp>  {
   final MeteoServices _meteoServices = MeteoServices();
+  final TextEditingController _cityController = TextEditingController();
+
   Meteo? _meteo;
   bool _isloading = true;
   String? _error;
@@ -30,6 +36,7 @@ class _MeteoAppState extends State<MeteoApp>  {
   @override
   void initState() {
     super.initState();
+
     _initMeteo();
   }
 
@@ -38,6 +45,12 @@ class _MeteoAppState extends State<MeteoApp>  {
       await _loadMeteofromLocationUser();
     }catch(_){
     }
+  }
+
+  @override
+  void dispose(){
+    _cityController.dispose();
+    super.dispose();
   }
 
   Future<void> _loadMeteo() async {
@@ -122,28 +135,36 @@ class _MeteoAppState extends State<MeteoApp>  {
           return Scaffold(
             appBar: AppBar(title: Text(S.current.appTitle)),
             body: 
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  children: 
-                    [
-                      CityResearch(onSubmitted: (value){
-                        setState(() =>
-                          _isloading = true);
-                        _loadMeteofromSelectedValue(value);
-                      }),
-                      const SizedBox(height: 20),
+              RefreshIndicator(
+                onRefresh: () async {
+                    await _loadMeteofromLocationUser();
+                    setState(() {
+                      _cityController.clear();
+                    });
+                },
+                child: SingleChildScrollView(
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  child: Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Column(
+                            children: 
+                              [
+                                CityResearch(controller: _cityController, onSubmitted: (value){
+                                  setState(() =>
+                                    _isloading = true);
+                                  _loadMeteofromSelectedValue(value);
+                                }),
+                                const SizedBox(height: 20),
 
-                      Expanded(
-                        child: Center(
-                          child : WeatherContent(
-                            isLoading : _isloading,
-                            error : _error,
-                            meteo :  _meteo,
-                          )
-                        )
-                      ) // Resultat de base
-                ])
+                                 WeatherContent(
+                                      isLoading : _isloading,
+                                      error : _error,
+                                      meteo :  _meteo,
+                                    )
+                              ]  
+                          )      
+                  ),
+                )
               )
           );
         })
