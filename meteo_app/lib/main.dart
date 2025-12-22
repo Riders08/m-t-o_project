@@ -14,6 +14,7 @@ import 'generated/l10n.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await NotificationServices.initNotif();
+
   runApp(const MeteoApp());
 }
 
@@ -36,8 +37,18 @@ class _MeteoAppState extends State<MeteoApp>  {
   @override
   void initState() {
     super.initState();
-
+    _initNotification();
     _initMeteo();
+  }
+
+  Future<void> _initNotification() async {
+    final notification = NotificationServices();
+    notification.DailyNotification(
+      hour: 16, 
+      minutes: 10, 
+      title: 'Météo du jour', 
+      body: 'Attention le temps chute actuellement'
+    );
   }
 
   Future<void> _initMeteo() async {

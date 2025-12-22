@@ -50,7 +50,7 @@ class MeteoServices {
   }
 
   Future<Meteo> fetchMeteo() async {
-    final url = '$_url?q=&units=metric&appid=$_apiKey';
+    final url = '$_url?q=Bordeaux&units=metric&appid=$_apiKey';
     final response = await http.get(Uri.parse(url));
     if(response.statusCode == 200){
       return Meteo.fromJson(json.decode(response.body));
