@@ -19,31 +19,53 @@ class NotificationServices {
     await androidPlugin?.requestExactAlarmsPermission();
   }
 
-  Future<void> DailyNotification({required int hour,
-                                  required int minutes,
-                                  required String title,
-                                  required String body
-                                }) async {
-    final now = tz.TZDateTime.now(tz.local);// Recuperation de l'heure et son ensemble via la localisation
-    var time = tz.TZDateTime(tz.local,now.year,now.month,now.day,hour, minutes, now.second,now.millisecond,now.microsecond); // Recupération exacte de l'heure et la date
+  Future<void> DailyNotification({
+    required int hour,
+    required int minutes,
+    required String title,
+    required String body,
+  }) async {
+    final now = tz.TZDateTime.now(tz.local);
 
-    if(time.isBefore(now)){ // check si l'heure que l'on a recupérer est passé ou non 
-      time = time.add(const Duration(days: 1)); // si passé on reporte à demain
+    tz.TZDateTime scheduledDate = tz.TZDateTime(
+      tz.local,
+      now.year,
+      now.month,
+      now.day,
+      hour,
+      minutes,
+    );
+
+    if (scheduledDate.isBefore(now)) {
+      scheduledDate = scheduledDate.add(const Duration(days: 1));
     }
 
-    const AndroidNotificationDetails androidNotificationDetails = AndroidNotificationDetails(
-      'daily_chanel',
-      'daily_Notification',
-      channelDescription: 'Notification du jour',
+    /*const androidDetails = AndroidNotificationDetails(
+      'daily_channel',
+      'Daily notifications',
+      channelDescription: 'Notification météo quotidienne',
       importance: Importance.max,
-      priority: Priority.high
-    );// Définition de la notification
+      priority: Priority.high,
+    );
 
-    await _notificationsPlugin.cancel(0);
-    const NotificationDetails notificationDetails = NotificationDetails(android: androidNotificationDetails);
-    
-    await _notificationsPlugin.periodicallyShow(0,title,body,RepeatInterval.daily,notificationDetails,androidAllowWhileIdle: true);
+    const notificationDetails =
+        NotificationDetails(android: androidDetails);*/
 
-  } 
-
+    await _notificationsPlugin.periodicallyShow(
+      3,
+      'Météo quotidienne',
+      'Attention le temps chute actuellement',
+      RepeatInterval.daily,
+      const NotificationDetails(
+        android: AndroidNotificationDetails(
+          'daily_channel',
+          'Notifications répétitives',
+          channelDescription: 'Notification météo quotidienne',
+          importance: Importance.max,
+          priority: Priority.high,
+        ),
+      ),
+      androidAllowWhileIdle: true,
+    );
+  }
 }

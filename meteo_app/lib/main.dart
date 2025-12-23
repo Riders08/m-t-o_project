@@ -44,8 +44,8 @@ class _MeteoAppState extends State<MeteoApp>  {
   Future<void> _initNotification() async {
     final notification = NotificationServices();
     notification.DailyNotification(
-      hour: 16, 
-      minutes: 10, 
+      hour: 12, 
+      minutes: 0, 
       title: 'Météo du jour', 
       body: 'Attention le temps chute actuellement'
     );
