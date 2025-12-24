@@ -1,16 +1,19 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:meteo_app/models/prevision.dart';
 import 'package:meteo_app/services/outils_services.dart';
 import '../models/meteo.dart';
+
 import '../generated/l10n.dart';
 
-class MeteoServices {
+class PrevisionServices {
   static const String _apiKey = 'b4750e8985606b88bdc8be1bfe178a73';
-  static const String _url = "https://api.openweathermap.org/data/2.5/weather";
+  static const String _url = "https://api.openweathermap.org/data/2.5/forecast";
   static final OutilsServices _outils = OutilsServices();
 
-  Future<Meteo> fetchMeteo() async {
+  /*Future<Prevision> fetchPrevision() async {
     List<Location> listLocations = await locationFromAddress("Bordeaux");
     final longitude = listLocations.first.longitude;
     final latitude = listLocations.first.latitude;
@@ -19,13 +22,14 @@ class MeteoServices {
     final url = '$_url?q=Bordeaux&units=$measure&appid=$_apiKey';
     final response = await http.get(Uri.parse(url));
     if(response.statusCode == 200){
-      return Meteo.fromJson(json.decode(response.body),measure);
+      return ;
     }else{
       throw Exception(S.current.bigError);
     }
   }
 
-  Future<Meteo> fetchMeteoWithLang(String location) async {
+
+  Future<Prevision> fetchPrevisionWithLang(String location) async {
     List<Location> listLocations = await locationFromAddress(location);
     final longitude = listLocations.first.longitude;
     final latitude = listLocations.first.latitude;
@@ -36,23 +40,23 @@ class MeteoServices {
     final response = await http.get(Uri.parse(url));
 
     if(response.statusCode == 200){
-      final jsonData = json.decode(response.body);
-      return Meteo.fromJson(jsonData,measure);
+      return ;
     }else{
       throw Exception(S.current.getDataAPIError);
     }
   }
 
-  Future<Meteo> fetchMeteoByCoordinatesWithLang(double lat, double lon) async {
+  Future<Prevision> fetchPrevisionByCoordinatesWithLang(double lat, double lon) async {
     final countryCode = await _outils.getCountryLocation(lat, lon);
     final lang = _outils.langFromCountry(countryCode);
     final measure = _outils.measureFromCountry(countryCode);
     final url = '$_url?lat=$lat&lon=$lon&units=$measure&lang=$lang&appid=$_apiKey';
     final result = await http.get(Uri.parse(url));
     if(result.statusCode == 200){
-      return Meteo.fromJson(json.decode(result.body),measure);
+      return ;
     }else{
       throw Exception(S.current.getLocationError);
     }
-  }
+  }*/
+
 }

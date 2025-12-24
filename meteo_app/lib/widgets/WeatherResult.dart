@@ -16,7 +16,7 @@ class WeatherResult extends StatelessWidget {
             children: 
               [
                 Text(meteo.location, style: const TextStyle(fontSize: 24)), // Lieu choisi ou par default
-                Text('${meteo.temperature} °C', style: const TextStyle(fontSize: 40)), // température en Celsius
+                Text('${meteo.temperature} ${meteo.measure}', style: const TextStyle(fontSize: 40)), // température en Celsius
                 Text(meteo.description), // Le temps sous sa forme
               ]
             );      

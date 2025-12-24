@@ -4,6 +4,7 @@ import 'package:meteo_app/services/meteo_services.dart';
 import 'package:meteo_app/services/notification_services.dart';
 
 import 'package:meteo_app/models/meteo.dart';
+import 'package:meteo_app/services/outils_services.dart';
 
 import 'package:meteo_app/widgets/CityResearch.dart';
 import 'package:meteo_app/widgets/WeatherContent.dart';
@@ -27,6 +28,7 @@ class MeteoApp extends StatefulWidget  {
 
 class _MeteoAppState extends State<MeteoApp>  {
   final MeteoServices _meteoServices = MeteoServices();
+  final OutilsServices _outilsServices = OutilsServices();
   final TextEditingController _cityController = TextEditingController();
 
   Meteo? _meteo;
@@ -84,8 +86,8 @@ class _MeteoAppState extends State<MeteoApp>  {
       List<Location> listLocations = await locationFromAddress(value);
       final latitude = listLocations.first.latitude;
       final longitude = listLocations.first.longitude;
-      final country = await _meteoServices.getCountryLocation(latitude, longitude);
-      final lang = await _meteoServices.langFromCountry(country);
+      final country = await _outilsServices.getCountryLocation(latitude, longitude);
+      final lang = await _outilsServices.langFromCountry(country);
       final result = await _meteoServices.fetchMeteoByCoordinatesWithLang(latitude, longitude);
       setState(() {
         _meteo = result;
@@ -103,9 +105,9 @@ class _MeteoAppState extends State<MeteoApp>  {
 
   Future<Meteo> _loadMeteofromLocationUser() async {
     try{
-      final position = await _meteoServices.getPosition();
-      final country = await _meteoServices.getCountryLocation(position.latitude, position.longitude);
-      final lang = await _meteoServices.langFromCountry(country);
+      final position = await _outilsServices.getPosition();
+      final country = await _outilsServices.getCountryLocation(position.latitude, position.longitude);
+      final lang = await _outilsServices.langFromCountry(country);
 
       final result = await _meteoServices.fetchMeteoByCoordinatesWithLang(position.latitude, position.longitude);
       setState(() {
@@ -167,11 +169,11 @@ class _MeteoAppState extends State<MeteoApp>  {
                                 }),
                                 const SizedBox(height: 20),
 
-                                 WeatherContent(
-                                      isLoading : _isloading,
-                                      error : _error,
-                                      meteo :  _meteo,
-                                    )
+                                WeatherContent(
+                                  isLoading : _isloading,
+                                  error : _error,
+                                  meteo :  _meteo,
+                                )
                               ]  
                           )      
                   ),
