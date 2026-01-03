@@ -12,5 +12,7 @@
   "permissionLocationError": "Pozwolenie na lokalizację zostało trwale odrzucone.",
   "getLocationTimeError": "Pobranie Twojej lokalizacji zajęło za dużo czasu",
 
-  "place": "Miasto/Kraj"
+  "place": "Miasto/Kraj",
+  
+  "feels_like": "Odczuwalna"
 }

@@ -30,6 +30,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "cityNotFound": MessageLookupByLibrary.simpleMessage(
       "Stadt nicht gefunden",
     ),
+    "feels_like": MessageLookupByLibrary.simpleMessage("Gefühlt"),
     "getDataAPIError": MessageLookupByLibrary.simpleMessage(
       "Fehler beim Abrufen der API-Daten!",
     ),

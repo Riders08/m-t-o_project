@@ -12,5 +12,7 @@
   "permissionLocationError": "Standortberechtigung dauerhaft verweigert.",
   "getLocationTimeError": "Das Abrufen deines Standorts hat zu lange gedauert",
 
-  "place": "Stadt/Land"
+  "place": "Stadt/Land",
+
+  "feels_like": "Gefühlt"
 }

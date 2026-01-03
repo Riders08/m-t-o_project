@@ -12,5 +12,7 @@
   "permissionLocationError": "Location permission permanently denied.",
   "getLocationTimeError": "Retrieving your location took too long",
 
-  "place": "City/Country"
+  "place": "City/Country",
+  
+  "feels_like": "Feels like"
 }

@@ -12,5 +12,7 @@
   "permissionLocationError": "Autorizzazione alla posizione negata in modo permanente.",
   "getLocationTimeError": "Il recupero della tua posizione ha richiesto troppo tempo",
 
-  "place": "Città/Paese"
+  "place": "Città/Paese",
+  
+  "feels_like": "Percepita"
 }

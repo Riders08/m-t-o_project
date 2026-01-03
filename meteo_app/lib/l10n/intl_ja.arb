@@ -12,5 +12,7 @@
   "permissionLocationError": "位置情報の権限が永久に拒否されました。",
   "getLocationTimeError": "位置情報の取得に時間がかかりすぎました",
 
-  "place": "都市／国"
+  "place": "都市／国",
+  
+  "feels_like": "体感温度"
 }

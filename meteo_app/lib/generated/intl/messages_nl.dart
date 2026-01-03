@@ -28,6 +28,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "bigError": MessageLookupByLibrary.simpleMessage("Grote fout"),
     "cityNotFound": MessageLookupByLibrary.simpleMessage("Stad niet gevonden"),
+    "feels_like": MessageLookupByLibrary.simpleMessage("Gevoeld"),
     "getDataAPIError": MessageLookupByLibrary.simpleMessage(
       "Het ophalen van gegevens van de API is mislukt!",
     ),

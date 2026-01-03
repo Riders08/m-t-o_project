@@ -12,5 +12,7 @@
   "permissionLocationError": "Permission de récupération de localisation refusée définitivement.",
   "getLocationTimeError":  "La récupération de votre localisation à mis trop de temps",
 
-  "place" : "Ville/Pays"
+  "place" : "Ville/Pays",
+  
+  "feels_like": "Ressentie"
 }

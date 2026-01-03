@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
-import 'package:meteo_app/services/meteo_services.dart';
 import 'package:meteo_app/services/notification_services.dart';
 
 import 'package:meteo_app/models/meteo.dart';
+import 'package:meteo_app/models/prevision.dart';
+
 import 'package:meteo_app/services/outils_services.dart';
+import 'package:meteo_app/services/meteo_services.dart';
+import 'package:meteo_app/services/prevision_services.dart';
 
 import 'package:meteo_app/widgets/CityResearch.dart';
 import 'package:meteo_app/widgets/WeatherContent.dart';
 
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:meteo_app/widgets/live_time.dart';
 import 'generated/l10n.dart';
 
 void main() async {
@@ -28,9 +32,11 @@ class MeteoApp extends StatefulWidget  {
 
 class _MeteoAppState extends State<MeteoApp>  {
   final MeteoServices _meteoServices = MeteoServices();
+  final PrevisionServices _previsionServices = PrevisionServices();
   final OutilsServices _outilsServices = OutilsServices();
   final TextEditingController _cityController = TextEditingController();
 
+  Prevision? _prevision;
   Meteo? _meteo;
   bool _isloading = true;
   String? _error;
@@ -55,7 +61,7 @@ class _MeteoAppState extends State<MeteoApp>  {
 
   Future<void> _initMeteo() async {
     try{
-      await _loadMeteofromLocationUser();
+      await _loadfromLocationUser();
     }catch(_){
     }
   }
@@ -66,11 +72,13 @@ class _MeteoAppState extends State<MeteoApp>  {
     super.dispose();
   }
 
-  Future<void> _loadMeteo() async {
+  Future<void> _loadDefault() async {
     try{
-      final result = await _meteoServices.fetchMeteo();
+      final resultMeteo = await _meteoServices.fetchMeteo();
+      final resultPrevision = await _previsionServices.fetchPrevision();
       setState(() {
-        _meteo = result;
+        _prevision = resultPrevision;
+        _meteo = resultMeteo;
         _isloading = false;
       });
     }catch(e){
@@ -81,16 +89,18 @@ class _MeteoAppState extends State<MeteoApp>  {
     }
   }
 
-  Future<void> _loadMeteofromSelectedValue(String value) async {
+  Future<void> _loadfromSelectedValue(String value) async {
     try{
       List<Location> listLocations = await locationFromAddress(value);
       final latitude = listLocations.first.latitude;
       final longitude = listLocations.first.longitude;
       final country = await _outilsServices.getCountryLocation(latitude, longitude);
       final lang = await _outilsServices.langFromCountry(country);
-      final result = await _meteoServices.fetchMeteoByCoordinatesWithLang(latitude, longitude);
+      final resultMeteo = await _meteoServices.fetchMeteoByCoordinatesWithLang(latitude, longitude);
+      final resultPrevision = await _previsionServices.fetchPrevisionByCoordinatesWithLang(latitude, longitude);
       setState(() {
-        _meteo = result;
+        _prevision = resultPrevision;
+        _meteo = resultMeteo;
         _languageCode = lang;
         _isloading = false;
         _error = null;
@@ -103,22 +113,25 @@ class _MeteoAppState extends State<MeteoApp>  {
     }
   }
 
-  Future<Meteo> _loadMeteofromLocationUser() async {
+  Future<Meteo> _loadfromLocationUser() async {
     try{
       final position = await _outilsServices.getPosition();
       final country = await _outilsServices.getCountryLocation(position.latitude, position.longitude);
       final lang = await _outilsServices.langFromCountry(country);
 
-      final result = await _meteoServices.fetchMeteoByCoordinatesWithLang(position.latitude, position.longitude);
+      final resultMeteo = await _meteoServices.fetchMeteoByCoordinatesWithLang(position.latitude, position.longitude);
+      final resultPrevision = await _previsionServices.fetchPrevisionByCoordinatesWithLang(position.latitude, position.longitude);
+      
       setState(() {
-        _meteo = result;
+        _prevision = resultPrevision;
+        _meteo = resultMeteo;
         _error = null;
         _languageCode = lang;
         _isloading = false;
       });
-      return result;
+      return resultMeteo;
     }catch (e) {
-      await _loadMeteo();
+      await _loadDefault();
       setState(() {
         _languageCode = "en";
         _error = S.current.locationError;
@@ -146,11 +159,19 @@ class _MeteoAppState extends State<MeteoApp>  {
       home: Builder(
         builder: (context) { 
           return Scaffold(
-            appBar: AppBar(title: Text(S.current.appTitle)),
+            appBar: AppBar(title: 
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(S.current.appTitle),
+                  LiveTime(time: DateTime.now()),
+                ],
+              ),
+            ),
             body: 
               RefreshIndicator(
                 onRefresh: () async {
-                    await _loadMeteofromLocationUser();
+                    await _loadfromLocationUser();
                     setState(() {
                       _cityController.clear();
                     });
@@ -165,7 +186,7 @@ class _MeteoAppState extends State<MeteoApp>  {
                                 CityResearch(controller: _cityController, onSubmitted: (value){
                                   setState(() =>
                                     _isloading = true);
-                                  _loadMeteofromSelectedValue(value);
+                                  _loadfromSelectedValue(value);
                                 }),
                                 const SizedBox(height: 20),
 

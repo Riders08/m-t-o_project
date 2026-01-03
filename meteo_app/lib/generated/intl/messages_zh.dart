@@ -28,6 +28,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "bigError": MessageLookupByLibrary.simpleMessage("重大错误"),
     "cityNotFound": MessageLookupByLibrary.simpleMessage("未找到城市"),
+    "feels_like": MessageLookupByLibrary.simpleMessage("体感"),
     "getDataAPIError": MessageLookupByLibrary.simpleMessage("无法从 API 获取数据！"),
     "getLocationError": MessageLookupByLibrary.simpleMessage("获取您的位置时出错"),
     "getLocationTimeError": MessageLookupByLibrary.simpleMessage("获取您的位置耗时过长"),

@@ -12,5 +12,7 @@
   "permissionLocationError": "위치 정보 권한이 영구적으로 거부되었습니다.",
   "getLocationTimeError": "위치 정보를 가져오는 데 시간이 너무 오래 걸렸습니다",
 
-  "place": "도시/국가"
+  "place": "도시/국가",
+  
+  "feels_like": "체감온도"
 }

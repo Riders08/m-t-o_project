@@ -28,6 +28,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "bigError": MessageLookupByLibrary.simpleMessage("심각한 오류"),
     "cityNotFound": MessageLookupByLibrary.simpleMessage("도시를 찾을 수 없습니다"),
+    "feels_like": MessageLookupByLibrary.simpleMessage("체감온도"),
     "getDataAPIError": MessageLookupByLibrary.simpleMessage(
       "API에서 데이터를 가져오지 못했습니다!",
     ),

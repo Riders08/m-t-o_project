@@ -1,6 +1,6 @@
 class Meteo{
   final String location;
-  final double temperature;
+  final int temperature;
   final String measure;
   final String description;
   final double ressentie;
@@ -10,6 +10,7 @@ class Meteo{
   final int pression;
   final int humidite;
   final String icon;
+  final DateTime time;
 
   const Meteo({
     required this.location,
@@ -23,12 +24,13 @@ class Meteo{
     required this.pression,
     required this.humidite,
     required this.icon,
+    required this.time,
   });
 
   factory Meteo.fromJson(Map<String,dynamic> json, String unit){
     return Meteo(
       location: json['name'], 
-      temperature: json['main']['temp'].toDouble(), 
+      temperature: shortNumber(json['main']['temp'].toDouble()), 
       measure: Meteo.getMeasure(unit), 
       description: json['weather'][0]['description'],
       ressentie: json['main']['feels_like'].toDouble(),
@@ -38,6 +40,24 @@ class Meteo{
       pression: json['main']['pressure'],
       humidite: json['main']['humidity'],
       icon: json['weather'][0]['icon'],
+      time: DateTime.fromMicrosecondsSinceEpoch(json['dt'] * 1000, isUtc: true),
+    );
+  }
+
+  factory Meteo.fromPrevisionJson(Map<String,dynamic> json, String unit, String city){
+    return Meteo(
+      location: city, 
+      temperature: shortNumber(json['main']['temp'].toDouble()), 
+      measure: Meteo.getMeasure(unit), 
+      description: json['weather'][0]['description'],
+      ressentie: json['main']['feels_like'].toDouble(),
+      minimum: json['main']['temp_min'].toDouble(),
+      maximum: json['main']['temp_max'].toDouble(),
+      temps: json['weather'][0]['main'],
+      pression: json['main']['pressure'],
+      humidite: json['main']['humidity'],
+      icon: json['weather'][0]['icon'],
+      time: DateTime.fromMicrosecondsSinceEpoch(json['dt'] * 1000, isUtc: true) 
     );
   }
 
@@ -46,6 +66,15 @@ class Meteo{
       return "°C";
     }else{
       return "°F";
+    }
+  }
+
+  static int shortNumber(double number){
+    double decimal = number - number.floor();
+    if(decimal > 0.5){
+      return number.ceilToDouble().toInt();
+    }else{
+      return number.floorToDouble().toInt();
     }
   }
 

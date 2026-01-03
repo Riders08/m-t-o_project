@@ -12,5 +12,7 @@
   "permissionLocationError": "位置权限被永久拒绝。",
   "getLocationTimeError": "获取您的位置耗时过长",
 
-  "place": "城市/国家"
+  "place": "城市/国家",
+  
+  "feels_like": "体感"
 }

@@ -28,6 +28,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "bigError": MessageLookupByLibrary.simpleMessage("重大なエラー"),
     "cityNotFound": MessageLookupByLibrary.simpleMessage("都市が見つかりません"),
+    "feels_like": MessageLookupByLibrary.simpleMessage("体感温度"),
     "getDataAPIError": MessageLookupByLibrary.simpleMessage(
       "API からデータを取得できませんでした。",
     ),

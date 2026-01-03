@@ -1,10 +1,8 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:geocoding/geocoding.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:meteo_app/models/prevision.dart';
 import 'package:meteo_app/services/outils_services.dart';
-import '../models/meteo.dart';
 
 import '../generated/l10n.dart';
 
@@ -13,7 +11,7 @@ class PrevisionServices {
   static const String _url = "https://api.openweathermap.org/data/2.5/forecast";
   static final OutilsServices _outils = OutilsServices();
 
-  /*Future<Prevision> fetchPrevision() async {
+  Future<Prevision> fetchPrevision() async {
     List<Location> listLocations = await locationFromAddress("Bordeaux");
     final longitude = listLocations.first.longitude;
     final latitude = listLocations.first.latitude;
@@ -22,7 +20,7 @@ class PrevisionServices {
     final url = '$_url?q=Bordeaux&units=$measure&appid=$_apiKey';
     final response = await http.get(Uri.parse(url));
     if(response.statusCode == 200){
-      return ;
+      return Prevision.fromJson(json.decode(response.body), measure);
     }else{
       throw Exception(S.current.bigError);
     }
@@ -40,7 +38,7 @@ class PrevisionServices {
     final response = await http.get(Uri.parse(url));
 
     if(response.statusCode == 200){
-      return ;
+      return Prevision.fromJson(json.decode(response.body), measure);
     }else{
       throw Exception(S.current.getDataAPIError);
     }
@@ -53,10 +51,10 @@ class PrevisionServices {
     final url = '$_url?lat=$lat&lon=$lon&units=$measure&lang=$lang&appid=$_apiKey';
     final result = await http.get(Uri.parse(url));
     if(result.statusCode == 200){
-      return ;
+      return Prevision.fromJson(json.decode(result.body), measure);
     }else{
       throw Exception(S.current.getLocationError);
     }
-  }*/
+  }
 
 }

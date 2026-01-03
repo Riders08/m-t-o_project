@@ -12,5 +12,7 @@
   "permissionLocationError": "Locatietoestemming permanent geweigerd.",
   "getLocationTimeError": "Het ophalen van je locatie heeft te lang geduurd",
 
-  "place": "Stad/Land"
+  "place": "Stad/Land",
+  
+  "feels_like": "Gevoeld"
 }

@@ -148,6 +148,11 @@ class S {
   String get place {
     return Intl.message('City/Country', name: 'place', desc: '', args: []);
   }
+
+  /// `Feels like`
+  String get feels_like {
+    return Intl.message('Feels like', name: 'feels_like', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
