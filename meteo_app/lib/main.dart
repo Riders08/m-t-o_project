@@ -183,7 +183,7 @@ class _MeteoAppState extends State<MeteoApp>  {
                           child: Column(
                             children: 
                               [
-                                CityResearch(controller: _cityController, onSubmitted: (value){
+                                CityResearch(onSubmitted: (value){
                                   setState(() =>
                                     _isloading = true);
                                   _loadfromSelectedValue(value);

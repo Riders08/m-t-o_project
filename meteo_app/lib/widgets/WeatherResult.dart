@@ -30,14 +30,14 @@ class WeatherResult extends StatelessWidget {
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      Flexible(child:
-                                        Text('(-${meteo.minimum}${meteo.measure})',style: const TextStyle(fontSize: 16, color: Colors.blue),),
+                                      if(meteo.minimum >= meteo.temperature) Flexible(child:
+                                        Text('(${meteo.minimum}${meteo.measure})',style: const TextStyle(fontSize: 16, color: Colors.blue),),
                                       ),
                                       const SizedBox(width: 8,height: 10,),
                                       Text('${meteo.temperature}${meteo.measure}', style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold)), // température en Celsius
                                       const SizedBox(width: 8,),
-                                      if(meteo.maximum != meteo.temperature) Flexible(child: 
-                                        Text('(+${meteo.maximum}${meteo.measure})',style: const TextStyle(fontSize: 16, color: Colors.red)),
+                                      if(meteo.maximum <= meteo.temperature) Flexible(child: 
+                                        Text('(${meteo.maximum}${meteo.measure})',style: const TextStyle(fontSize: 16, color: Colors.red)),
                                       ),
                                     ],
                                   ),
@@ -63,3 +63,10 @@ class WeatherResult extends StatelessWidget {
               );     
   }
 }
+
+// Pour la suite trois choix s'offrent à moi 
+// - Soit je commence a créer mon menu déroulant
+// - Soit j'améliore la barre de recherche 
+  // Je pars sur ça et j'ai déjà les propositions mais maintenant il me faut les propositions de facon et pour il faut créer un nouveau type cityResearch je pense
+    // Et on pourra utilise cette nouvelle api = https://api.openweathermap.org/geo/1.0/direct?q=talence&limit=5&appid=b4750e8985606b88bdc8be1bfe178a73
+// - Soit je commence à afficher les prévisions
