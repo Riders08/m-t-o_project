@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:geocoding/geocoding.dart';
+import 'package:meteo_app/services/cityResearch_services.dart';
 import 'package:meteo_app/services/notification_services.dart';
 
 import 'package:meteo_app/models/meteo.dart';
 import 'package:meteo_app/models/prevision.dart';
+import 'package:meteo_app/models/cityResearch.dart';
 
 import 'package:meteo_app/services/outils_services.dart';
 import 'package:meteo_app/services/meteo_services.dart';
 import 'package:meteo_app/services/prevision_services.dart';
 
-import 'package:meteo_app/widgets/CityResearch.dart';
+import 'package:meteo_app/widgets/CityResearchWidgets.dart';
 import 'package:meteo_app/widgets/WeatherContent.dart';
 
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -33,6 +34,7 @@ class MeteoApp extends StatefulWidget  {
 class _MeteoAppState extends State<MeteoApp>  {
   final MeteoServices _meteoServices = MeteoServices();
   final PrevisionServices _previsionServices = PrevisionServices();
+  final CityResearchServices _cityResearchServices = CityResearchServices();
   final OutilsServices _outilsServices = OutilsServices();
   final TextEditingController _cityController = TextEditingController();
 
@@ -89,15 +91,12 @@ class _MeteoAppState extends State<MeteoApp>  {
     }
   }
 
-  Future<void> _loadfromSelectedValue(String value) async {
+  Future<void> _loadfromSelectedValue(CityResearch ville) async {
     try{
-      List<Location> listLocations = await locationFromAddress(value);
-      final latitude = listLocations.first.latitude;
-      final longitude = listLocations.first.longitude;
-      final country = await _outilsServices.getCountryLocation(latitude, longitude);
+      final country = await _outilsServices.getCountryLocation(ville.latitude, ville.longitude);
       final lang = await _outilsServices.langFromCountry(country);
-      final resultMeteo = await _meteoServices.fetchMeteoByCoordinatesWithLang(latitude, longitude);
-      final resultPrevision = await _previsionServices.fetchPrevisionByCoordinatesWithLang(latitude, longitude);
+      final resultMeteo = await _meteoServices.fetchMeteoByCoordinatesWithLang(ville.latitude, ville.longitude);
+      final resultPrevision = await _previsionServices.fetchPrevisionByCoordinatesWithLang(ville.latitude, ville.longitude);
       setState(() {
         _prevision = resultPrevision;
         _meteo = resultMeteo;
@@ -183,11 +182,13 @@ class _MeteoAppState extends State<MeteoApp>  {
                           child: Column(
                             children: 
                               [
-                                CityResearch(onSubmitted: (value){
-                                  setState(() =>
-                                    _isloading = true);
-                                  _loadfromSelectedValue(value);
-                                }),
+                                CityResearchWidgets(cityResearchServices: _cityResearchServices,
+                                              onSubmitted: (value){
+                                                setState(() =>
+                                                  _isloading = true);
+                                                _loadfromSelectedValue(value);
+                                              },
+                                  ),
                                 const SizedBox(height: 20),
 
                                 WeatherContent(
