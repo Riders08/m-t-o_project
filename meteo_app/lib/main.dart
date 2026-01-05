@@ -11,11 +11,13 @@ import 'package:meteo_app/services/meteo_services.dart';
 import 'package:meteo_app/services/prevision_services.dart';
 
 import 'package:meteo_app/widgets/CityResearchWidgets.dart';
+import 'package:meteo_app/widgets/PrevisionContent.dart';
 import 'package:meteo_app/widgets/WeatherContent.dart';
 
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:meteo_app/widgets/live_time.dart';
 import 'generated/l10n.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -162,6 +164,7 @@ class _MeteoAppState extends State<MeteoApp>  {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+                  Text("Menu"),
                   Text(S.current.appTitle),
                   LiveTime(time: DateTime.now()),
                 ],
@@ -190,12 +193,17 @@ class _MeteoAppState extends State<MeteoApp>  {
                                               },
                                   ),
                                 const SizedBox(height: 20),
-
                                 WeatherContent(
                                   isLoading : _isloading,
                                   error : _error,
                                   meteo :  _meteo,
-                                )
+                                ),
+                                const SizedBox(height: 20),
+                                PrevisionContent(
+                                  isLoading: _isloading, 
+                                  error: _error, 
+                                  prevision: _prevision,
+                                ),
                               ]  
                           )      
                   ),

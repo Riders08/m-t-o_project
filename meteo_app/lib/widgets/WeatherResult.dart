@@ -66,4 +66,9 @@ class WeatherResult extends StatelessWidget {
 
 // Pour la suite trois choix s'offrent à moi 
 // - Soit je commence a créer mon menu déroulant
+    // - avoir un logo que l'on pourra cliquer pour afficher des options
 // - Soit je commence à afficher les prévisions
+      // - Modifier l'icon ou il y en a deux 
+      // - regler le soucis de la date 
+      // - Limite la quantité de prévisions tous de même
+// Bouton qui remet ma géolocalisation

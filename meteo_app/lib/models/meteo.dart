@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 class Meteo{
   final String location;
   final int temperature;
@@ -57,7 +59,7 @@ class Meteo{
       pression: json['main']['pressure'],
       humidite: json['main']['humidity'],
       icon: json['weather'][0]['icon'],
-      time: DateTime.fromMicrosecondsSinceEpoch(json['dt'] * 1000, isUtc: true) 
+      time: DateTime.fromMicrosecondsSinceEpoch(json['dt'] * 1000, isUtc: true).toLocal(),
     );
   }
 
@@ -100,5 +102,11 @@ class Meteo{
       case "50n": return "🌫️";
       default: return "Erreur le code d'icons donnée est inconnu !";
     }
+  }
+
+  static String getDisplayTime(DateTime time, String local){
+    final hour = DateFormat.Hm(local).format(time);
+    final day = DateFormat.yMMMEd(local).format(time);
+    return "$day : $hour";
   }
 }
