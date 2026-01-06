@@ -164,7 +164,12 @@ class _MeteoAppState extends State<MeteoApp>  {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Icon(FontAwesomeIcons.bars),
+                  GestureDetector(
+                    child: Icon(FontAwesomeIcons.bars),
+                    onTap: (){
+                      print("barre de menu demandé");
+                    },
+                  ),
                   Text(S.current.appTitle),
                   LiveTime(time: DateTime.now()),
                 ],
