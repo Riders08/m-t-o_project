@@ -48,7 +48,7 @@ class WeatherResult extends StatelessWidget {
                                       Row( 
                                         mainAxisAlignment: MainAxisAlignment.center,
                                         children: [
-                                          Text(Meteo.iconsForMeteo(meteo.icon), style: const TextStyle(fontSize: 64)), // Icon représentant le temps
+                                          Image.asset(Meteo.iconsForMeteo(meteo.icon),height: 32,width: 32), // Icon représentant le temps
                                           const SizedBox(width: 8),
                                           Text(meteo.description, style: const TextStyle(fontSize: 16)), // Le temps sous sa forme
                                         ]
@@ -67,8 +67,5 @@ class WeatherResult extends StatelessWidget {
 // Pour la suite trois choix s'offrent à moi 
 // - Soit je commence a créer mon menu déroulant
     // - avoir un logo que l'on pourra cliquer pour afficher des options
-// - Soit je commence à afficher les prévisions
-      // - Modifier l'icon ou il y en a deux 
-      // - regler le soucis de la date 
-      // - Limite la quantité de prévisions tous de même
 // Bouton qui remet ma géolocalisation
+ // - utiliser cette Icon(FontAwesomeIcons.locationDot)

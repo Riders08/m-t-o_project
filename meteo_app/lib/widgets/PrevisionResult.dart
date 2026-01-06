@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:meteo_app/models/prevision.dart';
 import 'package:meteo_app/models/meteo.dart';
 
+
 class PrevisionResult extends StatelessWidget{
   final Prevision prevision;
 
@@ -20,7 +21,7 @@ class PrevisionResult extends StatelessWidget{
               itemBuilder: (context, index){
                 final preMeteo = prevision.previsions[index];
                 return ListTile(
-                  leading: Text(Meteo.iconsForMeteo(preMeteo.icon), style: TextStyle(fontSize: 30),),
+                  leading: Image.asset(Meteo.iconsForMeteo(preMeteo.icon),height: 32, width: 32,),
                   title: Text(Meteo.getDisplayTime(preMeteo.time, localeTime), style: TextStyle(fontWeight: FontWeight.bold),),
                   subtitle: Text(preMeteo.description),
                   trailing: Text("${preMeteo.temperature}${preMeteo.measure}", style: TextStyle(fontSize: 25),),

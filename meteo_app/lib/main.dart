@@ -164,13 +164,13 @@ class _MeteoAppState extends State<MeteoApp>  {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("Menu"),
+                  Icon(FontAwesomeIcons.bars),
                   Text(S.current.appTitle),
                   LiveTime(time: DateTime.now()),
                 ],
               ),
             ),
-            body: 
+            body:
               RefreshIndicator(
                 onRefresh: () async {
                     await _loadfromLocationUser();
@@ -208,7 +208,14 @@ class _MeteoAppState extends State<MeteoApp>  {
                           )      
                   ),
                 )
-              )
+              ), 
+              floatingActionButton: FloatingActionButton(onPressed:(){
+                                      _loadfromLocationUser();
+                                      "La position a été remis a jour";
+                                    }, 
+                                    child: Icon(FontAwesomeIcons.locationDot),
+                                    ),
+              floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
           );
         })
     );
