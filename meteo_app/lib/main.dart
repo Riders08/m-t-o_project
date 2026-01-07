@@ -182,6 +182,7 @@ class _MeteoAppState extends State<MeteoApp>  {
                             ),
                       ),
             appBar: AppBar(
+              backgroundColor: Colors.blue,
               centerTitle: true,
               leading: 
                 Builder(

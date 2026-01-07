@@ -65,7 +65,12 @@ class WeatherResult extends StatelessWidget {
 }
 
 // Pour la suite trois choix s'offrent à moi 
-// - Soit je commence a créer mon menu déroulant
-    // - avoir un logo que l'on pourra cliquer pour afficher des options
-// Bouton qui remet ma géolocalisation
- // - utiliser cette Icon(FontAwesomeIcons.locationDot)
+// - Optimiser mon menu latéral
+  // Faire en sorte que lorsque je clique sur le menu alors le logo fasse une animation avant disparaitre
+    // - Choix theme (Donner la possibilité de selectionner son theme)
+    // - Choix background (Donner la possibilité de mettre son propres fond d'ecran)
+    // - choix language (Donner la possibilité de choisir la language de l'appli)
+    // - choix parametres (Donner la possibilité de choisir ses droits(rediriger vers les parametres de l'application en gros ))
+    // - choix historique (Donner la possibilité de voir les précèdentes recherche fais sur la barre de recherche)
+// Background 
+    // -Trouver des gifs qui s'adapteront au temps qu'il fait
