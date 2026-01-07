@@ -160,61 +160,91 @@ class _MeteoAppState extends State<MeteoApp>  {
       home: Builder(
         builder: (context) { 
           return Scaffold(
-            appBar: AppBar(title: 
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  GestureDetector(
-                    child: Icon(FontAwesomeIcons.bars),
-                    onTap: (){
-                      print("barre de menu demandé");
-                    },
-                  ),
-                  Text(S.current.appTitle),
-                  LiveTime(time: DateTime.now()),
-                ],
-              ),
+            drawer: Drawer(
+                      backgroundColor: Colors.deepOrange,
+                      child: ListView(
+                              scrollDirection: Axis.vertical,
+                              padding: EdgeInsets.zero,
+                              children: [
+                                DrawerHeader(
+                                  decoration: BoxDecoration(color: Colors.amber),
+                                  child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Text('theme'),
+                                            Text('background'),
+                                            Text('language'),
+                                            Text('autres'),
+                                          ],
+                                        )         
+                                )
+                              ],
+                            ),
+                      ),
+            appBar: AppBar(
+              centerTitle: true,
+              leading: 
+                Builder(
+                  builder: (context) => IconButton(onPressed:() => Scaffold.of(context).openDrawer(), 
+                  icon: Icon(FontAwesomeIcons.bars))
+                ),
+              title: Text(S.current.appTitle),
+              actions: [
+                Padding(
+                  padding: const EdgeInsetsGeometry.only(right: 12),
+                  child: LiveTime(time: DateTime.now(),),
+                ),
+              ]
             ),
             body:
-              RefreshIndicator(
-                onRefresh: () async {
-                    await _loadfromLocationUser();
-                    setState(() {
-                      _cityController.clear();
-                    });
-                },
-                child: SingleChildScrollView(
-                  physics: const AlwaysScrollableScrollPhysics(),
-                  child: Padding(
-                          padding: const EdgeInsets.all(16.0),
-                          child: Column(
-                            children: 
-                              [
-                                CityResearchWidgets(cityResearchServices: _cityResearchServices,
-                                              onSubmitted: (value){
-                                                setState(() =>
-                                                  _isloading = true);
-                                                _loadfromSelectedValue(value);
-                                              },
-                                  ),
-                                const SizedBox(height: 20),
-                                WeatherContent(
-                                  isLoading : _isloading,
-                                  error : _error,
-                                  meteo :  _meteo,
-                                ),
-                                const SizedBox(height: 20),
-                                PrevisionContent(
-                                  isLoading: _isloading, 
-                                  error: _error, 
-                                  prevision: _prevision,
-                                ),
-                              ]  
-                          )      
+              Stack(
+                children: [
+                  Positioned.fill( // Background
+                    child: Image.asset("assets/theme/test_pc.jpg",fit: BoxFit.cover,width: double.infinity ,height: double.infinity) 
                   ),
-                )
-              ), 
-              floatingActionButton: FloatingActionButton(onPressed:(){
+                  SafeArea( // Ensemble du contenu
+                    child: RefreshIndicator(
+                    onRefresh: () async {
+                        await _loadfromLocationUser();
+                        setState(() {
+                          _cityController.clear();
+                        });
+                    },
+                    child: SingleChildScrollView(
+                      physics: const AlwaysScrollableScrollPhysics(),
+                      child: Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Column(
+                                children: 
+                                  [
+                                    CityResearchWidgets(cityResearchServices: _cityResearchServices, // Barre de recherche
+                                                  onSubmitted: (value){
+                                                    setState(() =>
+                                                      _isloading = true);
+                                                    _loadfromSelectedValue(value);
+                                                  },
+                                      ),
+                                    const SizedBox(height: 20),
+                                    WeatherContent( // Le temps actuelle
+                                      isLoading : _isloading,
+                                      error : _error,
+                                      meteo :  _meteo,
+                                    ),
+                                    const SizedBox(height: 20),
+                                    PrevisionContent( //Les previsions
+                                      isLoading: _isloading, 
+                                      error: _error, 
+                                      prevision: _prevision,
+                                    ),
+                                  ]  
+                              ),      
+                            ),
+                      )
+                    ),
+                  ),
+                ],
+              ),
+              floatingActionButton: FloatingActionButton(onPressed:(){ // Bouton qui remet a jour avec la localisation
                                       _loadfromLocationUser();
                                       "La position a été remis a jour";
                                     }, 

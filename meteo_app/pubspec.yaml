@@ -54,6 +54,7 @@ dev_dependencies:
 # The following section is specific to Flutter packages.
 flutter:
   assets:
+    # Icons de temps
     - assets/icons/sun.png
     - assets/icons/snow.png
     - assets/icons/moon.png
@@ -66,7 +67,13 @@ flutter:
     - assets/icons/cloud-rain-moon.png
     - assets/icons/cloud-moon.png
     - assets/icons/cloud-bolt.png
+    # Background du logiciel par défaut
+    - assets/theme/test_pc_gif.gif
+    - assets/theme/test_pc.jpg
+    - assets/theme/test_portrait_gif.gif
+    - assets/theme/test_portrait.jpeg
     
+
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
