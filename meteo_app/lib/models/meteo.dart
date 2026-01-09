@@ -83,7 +83,7 @@ class Meteo{
   static String iconsForMeteo(String icons){
     switch(icons){
       case "01d": return "assets/icons/sun.png";
-      case "01n": return "assets/icons/moon.png";
+      case "01n": return "assets/icons/moon.png"; 
       case "02d": return "assets/icons/cloud-sun.png";
       case "02n": return "assets/icons/cloud-moon.png";
       case "03d": return "assets/icons/cloud.png";
@@ -94,12 +94,36 @@ class Meteo{
       case "09n": return "assets/icons/cloud-rain.png";
       case "10d": return "assets/icons/cloud-rain-sun.png";
       case "10n": return "assets/icons/cloud-rain-moon.png";
-      case "11d": return "assets/icons/cloud-bolt.png";
-      case "11n": return "assets/icons/cloud-bolt.png";
+      case "11d": return "assets/icons/cloud-bolt.png"; 
+      case "11n": return "assets/icons/cloud-bolt.png"; 
       case "13d": return "assets/icons/snow.png";
-      case "13n": return "assets/icons/snow.png"; 
-      case "50d": return "assets/icons/fog.png";
-      case "50n": return "assets/icons/fog.png";
+      case "13n": return "assets/icons/snow.png";
+      case "50d": return "assets/icons/fog.png"; 
+      case "50n": return "assets/icons/fog.png"; 
+      default: return "assets/icons/error.png";
+    }
+  }
+
+  static String backgroundForMeteo(String icons){
+    switch(icons){
+      case "01d": return "assets/theme/sun.jpg";
+      case "01n": return "assets/theme/moon.png";
+      case "02d": return "assets/theme/cloud-sun.gif";
+      case "02n": return "assets/theme/cloud-moon.jpg";
+      case "03d": return "assets/theme/cloud.gif";
+      case "03n": return "assets/theme/cloud-night.gif";
+      case "04d": return "assets/theme/cloud.gif";
+      case "04n": return "assets/theme/cloud-night.gif";
+      case "09d": return "assets/theme/rain.gif";
+      case "09n": return "assets/theme/rain.gif"; 
+      case "10d": return "assets/theme/rain.gif";
+      case "10n": return "assets/theme/rain.gif";
+      case "11d": return "assets/theme/cloud-bolt.gif";
+      case "11n": return "assets/theme/cloud-bolt.gif"; 
+      case "13d": return "assets/theme/snow-day.gif";
+      case "13n": return "assets/theme/snow-night.gif";
+      case "50d": return "assets/theme/fog.jpg";
+      case "50n": return "assets/theme/fog.jpg"; 
       default: return "assets/icons/error.png";
     }
   }

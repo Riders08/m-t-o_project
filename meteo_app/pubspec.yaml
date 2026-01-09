@@ -68,8 +68,20 @@ flutter:
     - assets/icons/cloud-moon.png
     - assets/icons/cloud-bolt.png
     # Background du logiciel par défaut
-    - assets/theme/test_pc.jpg
-    
+    - assets/theme/sun.jpg
+    - assets/theme/snow-night.gif
+    - assets/theme/snow-day.gif
+    - assets/theme/rain.gif
+    - assets/theme/moon.png
+    - assets/theme/fog.jpg
+    - assets/theme/cloud.gif
+    - assets/theme/cloud-sun.gif
+    - assets/theme/cloud-night.gif
+    - assets/theme/cloud-moon.jpg
+    - assets/theme/cloud-bolt.gif
+    # Background pour tout temps proposition (pourquoi essayer de mettre des thèmes de bases mais pour le moment pas sûr)
+    - assets/theme/other/
+  
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

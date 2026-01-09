@@ -201,7 +201,7 @@ class _MeteoAppState extends State<MeteoApp>  {
               Stack(
                 children: [
                   Positioned.fill( // Background
-                    child: Image.asset("assets/theme/test_pc.jpg",fit: BoxFit.cover,width: double.infinity ,height: double.infinity) 
+                    child: Image.asset(Meteo.backgroundForMeteo(_meteo!.icon),fit: BoxFit.cover,width: double.infinity ,height: double.infinity) 
                   ),
                   SafeArea( // Ensemble du contenu
                     child: RefreshIndicator(

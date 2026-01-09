@@ -73,4 +73,5 @@ class WeatherResult extends StatelessWidget {
     // - choix parametres (Donner la possibilité de choisir ses droits(rediriger vers les parametres de l'application en gros ))
     // - choix historique (Donner la possibilité de voir les précèdentes recherche fais sur la barre de recherche)
 // Background 
-    // -Trouver des gifs qui s'adapteront au temps qu'il fait
+    // - Adapter la card
+    // - faire en sorte que l'ecriture reste lisible peux importe le background
