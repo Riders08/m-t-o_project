@@ -54,6 +54,8 @@ dev_dependencies:
 # The following section is specific to Flutter packages.
 flutter:
   assets:
+    # Fond d'écran d'arrivée
+    - assets/home.jpg
     # Icons de temps
     - assets/icons/sun.png
     - assets/icons/snow.png

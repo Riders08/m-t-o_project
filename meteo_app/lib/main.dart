@@ -40,6 +40,8 @@ class _MeteoAppState extends State<MeteoApp>  {
   final OutilsServices _outilsServices = OutilsServices();
   final TextEditingController _cityController = TextEditingController();
 
+
+  bool _appReady = false;
   Prevision? _prevision;
   Meteo? _meteo;
   bool _isloading = true;
@@ -84,6 +86,7 @@ class _MeteoAppState extends State<MeteoApp>  {
         _prevision = resultPrevision;
         _meteo = resultMeteo;
         _isloading = false;
+        _appReady = true;
       });
     }catch(e){
       setState(() {
@@ -129,6 +132,7 @@ class _MeteoAppState extends State<MeteoApp>  {
         _error = null;
         _languageCode = lang;
         _isloading = false;
+        _appReady = true;
       });
       return resultMeteo;
     }catch (e) {
@@ -159,102 +163,129 @@ class _MeteoAppState extends State<MeteoApp>  {
       supportedLocales: S.delegate.supportedLocales,
       home: Builder(
         builder: (context) { 
-          return Scaffold(
-            drawer: Drawer(
-                      backgroundColor: Colors.deepOrange,
-                      child: ListView(
-                              scrollDirection: Axis.vertical,
-                              padding: EdgeInsets.zero,
-                              children: [
-                                DrawerHeader(
-                                  decoration: BoxDecoration(color: Colors.amber),
-                                  child: Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            Text('theme'),
-                                            Text('background'),
-                                            Text('language'),
-                                            Text('autres'),
-                                          ],
-                                        )         
-                                )
-                              ],
-                            ),
-                      ),
-            appBar: AppBar(
-              backgroundColor: Colors.blue,
-              centerTitle: true,
-              leading: 
-                Builder(
-                  builder: (context) => IconButton(onPressed:() => Scaffold.of(context).openDrawer(), 
-                  icon: Icon(FontAwesomeIcons.bars))
-                ),
-              title: Text(S.current.appTitle),
-              actions: [
-                Padding(
-                  padding: const EdgeInsetsGeometry.only(right: 12),
-                  child: LiveTime(time: DateTime.now(),),
-                ),
-              ]
-            ),
-            body:
-              Stack(
-                children: [
-                  Positioned.fill( // Background
-                    child: Image.asset(Meteo.backgroundForMeteo(_meteo!.icon),fit: BoxFit.cover,width: double.infinity ,height: double.infinity) 
-                  ),
-                  SafeArea( // Ensemble du contenu
-                    child: RefreshIndicator(
-                    onRefresh: () async {
-                        await _loadfromLocationUser();
-                        setState(() {
-                          _cityController.clear();
-                        });
-                    },
-                    child: SingleChildScrollView(
-                      physics: const AlwaysScrollableScrollPhysics(),
-                      child: Padding(
-                              padding: const EdgeInsets.all(16.0),
-                              child: Column(
-                                children: 
-                                  [
-                                    CityResearchWidgets(cityResearchServices: _cityResearchServices, // Barre de recherche
-                                                  onSubmitted: (value){
-                                                    setState(() =>
-                                                      _isloading = true);
-                                                    _loadfromSelectedValue(value);
-                                                  },
-                                      ),
-                                    const SizedBox(height: 20),
-                                    WeatherContent( // Le temps actuelle
-                                      isLoading : _isloading,
-                                      error : _error,
-                                      meteo :  _meteo,
-                                    ),
-                                    const SizedBox(height: 20),
-                                    PrevisionContent( //Les previsions
-                                      isLoading: _isloading, 
-                                      error: _error, 
-                                      prevision: _prevision,
-                                    ),
-                                  ]  
-                              ),      
-                            ),
-                      )
-                    ),
-                  ),
-                ],
-              ),
-              floatingActionButton: FloatingActionButton(onPressed:(){ // Bouton qui remet a jour avec la localisation
-                                      _loadfromLocationUser();
-                                      "La position a été remis a jour";
-                                    }, 
-                                    child: Icon(FontAwesomeIcons.locationDot),
-                                    ),
-              floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-          );
+          return _appReady ? _buildMainApp() : _buildSplashHome();
         })
     );
   }
+
+  Widget _buildSplashHome() {
+    return Scaffold(
+      body: SizedBox.expand(
+        child: Image.asset(
+          "assets/home.jpg",
+          fit: BoxFit.cover,
+        ),
+      ),
+    );
+  }
+  
+  Widget _buildMainApp(){
+    return Scaffold(
+      drawer: Drawer(
+              backgroundColor: Colors.deepOrange,
+              child: ListView(
+                      scrollDirection: Axis.vertical,
+                      padding: EdgeInsets.zero,
+                      children: [
+                        DrawerHeader(
+                          decoration: BoxDecoration(color: Colors.amber),
+                          child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text('theme'),
+                                    Text('background'),
+                                    Text('language'),
+                                    Text('autres'),
+                                  ],
+                                )         
+                        )
+                      ],
+                    ),
+              ),
+      appBar: 
+        AppBar(
+        backgroundColor: Colors.blue,
+        centerTitle: true,
+        leading: 
+          Builder(
+            builder: (context) => IconButton(onPressed:() => Scaffold.of(context).openDrawer(), 
+            icon: Icon(FontAwesomeIcons.bars))
+          ),
+        title: Text(S.current.appTitle),
+        actions: [
+          Padding(
+            padding: const EdgeInsetsGeometry.only(right: 12),
+            child: LiveTime(time: DateTime.now(),),
+          ),
+        ]
+      ),
+      body:
+        Stack(
+          children: [
+            Positioned.fill( // Background
+              child: Image.asset(
+                _meteo == null 
+                ? "assets/home.jpg"
+                : Meteo.backgroundForMeteo(_meteo!.icon)
+              ,fit: BoxFit.cover,width: double.infinity ,height: double.infinity) 
+            ),
+            SafeArea( // Ensemble du contenu
+              child: AnimatedOpacity(
+                duration: const Duration(milliseconds: 600),
+                opacity: _appReady ? 1 : 0,
+                child: IgnorePointer(
+                    ignoring: !_appReady,
+                    child: RefreshIndicator(
+                      onRefresh: () async {
+                          await _loadfromLocationUser();
+                          setState(() {
+                            _cityController.clear();
+                          });
+                      },
+                      child: SingleChildScrollView(
+                        physics: const AlwaysScrollableScrollPhysics(),
+                        child: Padding(
+                                padding: const EdgeInsets.all(16.0),
+                                child: Column(
+                                  children: 
+                                    [
+                                      CityResearchWidgets(cityResearchServices: _cityResearchServices, // Barre de recherche
+                                                    onSubmitted: (value){
+                                                      setState(() =>
+                                                        _isloading = true);
+                                                      _loadfromSelectedValue(value);
+                                                    },
+                                        ),
+                                      const SizedBox(height: 20),
+                                      WeatherContent( // Le temps actuelle
+                                        isLoading : _isloading,
+                                        error : _error,
+                                        meteo :  _meteo,
+                                      ),
+                                      const SizedBox(height: 20),
+                                      PrevisionContent( //Les previsions
+                                        isLoading: _isloading, 
+                                        error: _error, 
+                                        prevision: _prevision,
+                                      ),
+                                    ]  
+                                ),      
+                              ),
+                        )
+                    ,)
+                ),
+              ),
+            ),
+          ],
+        ),
+        floatingActionButton: FloatingActionButton(onPressed:(){ // Bouton qui remet a jour avec la localisation
+                                _loadfromLocationUser();
+                              }, 
+                              child: Icon(FontAwesomeIcons.locationDot),
+                              ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+    );
+  }
+
 }
 
