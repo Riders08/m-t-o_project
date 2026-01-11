@@ -11,6 +11,7 @@ import 'package:meteo_app/services/meteo_services.dart';
 import 'package:meteo_app/services/prevision_services.dart';
 
 import 'package:meteo_app/widgets/CityResearchWidgets.dart';
+import 'package:meteo_app/widgets/PressIcon.dart';
 import 'package:meteo_app/widgets/PrevisionContent.dart';
 import 'package:meteo_app/widgets/WeatherContent.dart';
 
@@ -40,7 +41,7 @@ class _MeteoAppState extends State<MeteoApp>  {
   final OutilsServices _outilsServices = OutilsServices();
   final TextEditingController _cityController = TextEditingController();
 
-
+  bool _drawerOpen = false;
   bool _appReady = false;
   Prevision? _prevision;
   Meteo? _meteo;
@@ -181,23 +182,32 @@ class _MeteoAppState extends State<MeteoApp>  {
   
   Widget _buildMainApp(){
     return Scaffold(
+      onDrawerChanged:(isOpened) {
+        setState(() {
+          _drawerOpen = isOpened;
+        });
+      },
       drawer: Drawer(
-              backgroundColor: Colors.deepOrange,
+              backgroundColor: Colors.blue,
               child: ListView(
                       scrollDirection: Axis.vertical,
                       padding: EdgeInsets.zero,
                       children: [
                         DrawerHeader(
-                          decoration: BoxDecoration(color: Colors.amber),
+                          decoration: BoxDecoration(color: const Color.fromARGB(255, 255, 255, 255)),
                           child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text('theme'),
-                                    Text('background'),
-                                    Text('language'),
-                                    Text('autres'),
+                                    Title(color: Colors.black ,child: Text(S.current.appTitle, style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold, color: Colors.grey),)),
+                                    Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Text("data"),
+                                        Text("datrhzrhzrha"),
+                                      ],
+                                    ),
                                   ],
-                                )         
+                                )      
                         )
                       ],
                     ),
@@ -208,8 +218,15 @@ class _MeteoAppState extends State<MeteoApp>  {
         centerTitle: true,
         leading: 
           Builder(
-            builder: (context) => IconButton(onPressed:() => Scaffold.of(context).openDrawer(), 
-            icon: Icon(FontAwesomeIcons.bars))
+            builder: (context) => PressIcon(
+              icon: FontAwesomeIcons.bars, 
+              open: _drawerOpen,
+              onTap: () async {
+                setState(() => _drawerOpen = true);
+                await Future.delayed(const Duration(milliseconds: 300));
+                Scaffold.of(context).openDrawer();
+              }
+            ), 
           ),
         title: Text(S.current.appTitle),
         actions: [
@@ -228,6 +245,11 @@ class _MeteoAppState extends State<MeteoApp>  {
                 ? "assets/home.jpg"
                 : Meteo.backgroundForMeteo(_meteo!.icon)
               ,fit: BoxFit.cover,width: double.infinity ,height: double.infinity) 
+            ),
+            Positioned.fill(
+              child: Container(
+                color:  Colors.black.withAlpha(90),
+              )
             ),
             SafeArea( // Ensemble du contenu
               child: AnimatedOpacity(
@@ -281,7 +303,8 @@ class _MeteoAppState extends State<MeteoApp>  {
         floatingActionButton: FloatingActionButton(onPressed:(){ // Bouton qui remet a jour avec la localisation
                                 _loadfromLocationUser();
                               }, 
-                              child: Icon(FontAwesomeIcons.locationDot),
+                              backgroundColor: Colors.blue,
+                              child: Icon(FontAwesomeIcons.locationDot, color: Colors.white,),
                               ),
         floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );

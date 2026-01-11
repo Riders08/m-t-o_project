@@ -24,7 +24,7 @@ class _CityResearchState extends State<CityResearchWidgets>{
     return Autocomplete<CityResearch>(
       displayStringForOption: (ville) => ville.displayName,
       optionsBuilder: (TextEditingValue controller) async{
-        if(controller.text.isEmpty || controller.text.length < 2){
+        if(controller.text.isEmpty || controller.text.length < 3){
           return [];
         }
         return (await widget.cityResearchServices.searchCities(controller.text)).where(
@@ -36,14 +36,24 @@ class _CityResearchState extends State<CityResearchWidgets>{
         widget.onSubmitted(ville);
       },
       fieldViewBuilder: (context, textEditingController, focusNode, onFieldSubmitted){    
-        return TextField(
-          controller: textEditingController,
-          focusNode: focusNode,
-          decoration: InputDecoration(
-                              labelText: S.current.place, 
-                              border: OutlineInputBorder()
+        return Theme( //Unique methode trouver pour que le selector vire au bleu.
+          data: Theme.of(context).copyWith(
+            colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
           ),
-        );
+          child: TextField(
+                  controller: textEditingController,
+                  focusNode: focusNode,
+                  decoration: InputDecoration(
+                                      labelText: S.current.place, 
+                                      labelStyle: TextStyle(color:  Colors.white),
+                                      floatingLabelStyle: TextStyle(color:  Colors.white),
+                                      enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue),),
+                                      focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue, width: 2),),
+                  ),
+                  style: TextStyle(color: Colors.white),
+                  cursorColor: Colors.blue,
+                ),
+          );
       },
     );
     

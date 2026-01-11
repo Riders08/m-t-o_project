@@ -22,9 +22,9 @@ class PrevisionResult extends StatelessWidget{
                 final preMeteo = prevision.previsions[index];
                 return ListTile(
                   leading: Image.asset(Meteo.iconsForMeteo(preMeteo.icon),height: 32, width: 32,),
-                  title: Text(Meteo.getDisplayTime(preMeteo.time, localeTime), style: TextStyle(fontWeight: FontWeight.bold),),
-                  subtitle: Text(preMeteo.description),
-                  trailing: Text("${preMeteo.temperature}${preMeteo.measure}", style: TextStyle(fontSize: 25),),
+                  title: Text(Meteo.getDisplayTime(preMeteo.time, localeTime), style: TextStyle(color: Colors.white ,fontWeight: FontWeight.bold),  ),
+                  subtitle: Text(preMeteo.description, style: TextStyle(color: Colors.white),),
+                  trailing: Text("${preMeteo.temperature}${preMeteo.measure}", style: TextStyle(color: Colors.white ,fontSize: 25),),
                 );
               }
         
