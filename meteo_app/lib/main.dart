@@ -261,6 +261,7 @@ class _MeteoAppState extends State<MeteoApp>  {
                       onRefresh: () async {
                           await _loadfromLocationUser();
                           setState(() {
+                            FocusManager.instance.primaryFocus?.unfocus();
                             _cityController.clear();
                           });
                       },
@@ -271,7 +272,7 @@ class _MeteoAppState extends State<MeteoApp>  {
                                 child: Column(
                                   children: 
                                     [
-                                      CityResearchWidgets(cityResearchServices: _cityResearchServices, // Barre de recherche
+                                      CityResearchWidgets(cityController: _cityController, cityResearchServices: _cityResearchServices, // Barre de recherche
                                                     onSubmitted: (value){
                                                       setState(() =>
                                                         _isloading = true);
@@ -302,6 +303,10 @@ class _MeteoAppState extends State<MeteoApp>  {
         ),
         floatingActionButton: FloatingActionButton(onPressed:(){ // Bouton qui remet a jour avec la localisation
                                 _loadfromLocationUser();
+                                setState(() {
+                                  FocusManager.instance.primaryFocus?.unfocus();
+                                  _cityController.clear();
+                                });
                               }, 
                               backgroundColor: Colors.blue,
                               child: Icon(FontAwesomeIcons.locationDot, color: Colors.white,),

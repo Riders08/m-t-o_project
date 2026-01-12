@@ -74,5 +74,3 @@ class WeatherResult extends StatelessWidget {
     // - choix historique (Donner la possibilité de voir les précèdentes recherche fais sur la barre de recherche)
 // Background 
     // - Adapter la card
-// Barre de recherche 
-  // Une fois que l'on a remis la position o fait un F5 le text de barrre de recherche doit se reinitialiser

@@ -5,11 +5,13 @@ import 'package:meteo_app/models/cityResearch.dart';
 import '../generated/l10n.dart';
 
 class CityResearchWidgets extends StatefulWidget {
+  final TextEditingController cityController;
   final CityResearchServices cityResearchServices;
   final Function(CityResearch city) onSubmitted;
 
   const CityResearchWidgets({
     super.key,
+    required this.cityController,
     required this.cityResearchServices,
     required this.onSubmitted,
   });
@@ -36,6 +38,12 @@ class _CityResearchState extends State<CityResearchWidgets>{
         widget.onSubmitted(ville);
       },
       fieldViewBuilder: (context, textEditingController, focusNode, onFieldSubmitted){    
+        widget.cityController.value = textEditingController.value;
+        widget.cityController.addListener(() {
+          if(widget.cityController.value != textEditingController.value){
+            textEditingController.value = widget.cityController.value;
+          }
+        });
         return Theme( //Unique methode trouver pour que le selector vire au bleu.
           data: Theme.of(context).copyWith(
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
