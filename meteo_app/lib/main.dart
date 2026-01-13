@@ -289,6 +289,7 @@ class _MeteoAppState extends State<MeteoApp>  {
                                       PrevisionContent( //Les previsions
                                         isLoading: _isloading, 
                                         error: _error, 
+                                        meteo: _meteo,
                                         prevision: _prevision,
                                       ),
                                     ]  

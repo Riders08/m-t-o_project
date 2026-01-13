@@ -42,7 +42,7 @@ class Meteo{
       pression: json['main']['pressure'],
       humidite: json['main']['humidity'],
       icon: json['weather'][0]['icon'],
-      time: DateTime.fromMicrosecondsSinceEpoch(json['dt'] * 1000, isUtc: true),
+      time: DateTime.fromMillisecondsSinceEpoch(json['dt'] * 1000, isUtc: true).toLocal(),
     );
   }
 
@@ -132,5 +132,9 @@ class Meteo{
     final hour = DateFormat.Hm(local).format(time);
     final day = DateFormat.yMMMEd(local).format(time);
     return "$day : $hour";
+  }
+
+  static bool sameDay(DateTime today, DateTime check){
+     return today.year == check.year && today.month == check.month && today.day == check.day;
   }
 }

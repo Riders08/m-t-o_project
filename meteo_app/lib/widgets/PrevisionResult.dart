@@ -4,10 +4,12 @@ import 'package:meteo_app/models/meteo.dart';
 
 
 class PrevisionResult extends StatelessWidget{
+  final Meteo meteo;
   final Prevision prevision;
 
   const PrevisionResult({
     super.key,
+    required this.meteo,
     required this.prevision
   });
 
@@ -20,12 +22,17 @@ class PrevisionResult extends StatelessWidget{
               itemCount: prevision.previsions.length,
               itemBuilder: (context, index){
                 final preMeteo = prevision.previsions[index];
-                return ListTile(
-                  leading: Image.asset(Meteo.iconsForMeteo(preMeteo.icon),height: 32, width: 32,),
-                  title: Text(Meteo.getDisplayTime(preMeteo.time, localeTime), style: TextStyle(color: Colors.white ,fontWeight: FontWeight.bold),  ),
-                  subtitle: Text(preMeteo.description, style: TextStyle(color: Colors.white),),
-                  trailing: Text("${preMeteo.temperature}${preMeteo.measure}", style: TextStyle(color: Colors.white ,fontSize: 25),),
-                );
+                print("NOW: ${meteo.time}");
+                print("PRE: ${preMeteo.time}");
+                if(Meteo.sameDay(meteo.time, preMeteo.time)){
+                  return ListTile(
+                    leading: Image.asset(Meteo.iconsForMeteo(preMeteo.icon),height: 32, width: 32,),
+                    title: Text(Meteo.getDisplayTime(preMeteo.time, localeTime), style: TextStyle(color: Colors.white ,fontWeight: FontWeight.bold),  ),
+                    subtitle: Text(preMeteo.description, style: TextStyle(color: Colors.white),),
+                    trailing: Text("${preMeteo.temperature}${preMeteo.measure}", style: TextStyle(color: Colors.white ,fontSize: 25),),
+                  );
+                }
+                return const SizedBox.shrink();
               }
         
     );

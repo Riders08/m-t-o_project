@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import '../generated/l10n.dart';
 import 'package:meteo_app/models/meteo.dart';
@@ -13,7 +15,12 @@ class WeatherResult extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-              child: Card(
+              child: ClipRRect(
+                borderRadius: BorderRadiusGeometry.circular(16.0),
+                child: BackdropFilter(
+                  filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),               
+                  child: Card(
+                        color: Color.fromARGB(26, 255, 255, 255),
                         elevation: 4,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(16),
@@ -33,8 +40,8 @@ class WeatherResult extends StatelessWidget {
                                       if(meteo.minimum < meteo.temperature.toDouble()) Flexible(child:
                                         Text('(${meteo.minimum}${meteo.measure})',style: const TextStyle(fontSize: 16, color: Colors.blue),),
                                       ),
-                                      const SizedBox(width: 8,height: 10,),
-                                      Text('${meteo.temperature}${meteo.measure}', style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold)), // température en Celsius
+                                      const SizedBox(width: 8,),
+                                      Text('${meteo.temperature}${meteo.measure}', style: const TextStyle(fontSize: 56, fontWeight: FontWeight.bold)),// température en Celsius
                                       const SizedBox(width: 8,),
                                       if(meteo.maximum > meteo.temperature.toDouble()) Flexible(child: 
                                         Text('(${meteo.maximum}${meteo.measure})',style: const TextStyle(fontSize: 16, color: Colors.red)),
@@ -53,6 +60,7 @@ class WeatherResult extends StatelessWidget {
                                           Text(meteo.description, style: const TextStyle(fontSize: 16)), // Le temps sous sa forme
                                         ]
                                       ),
+                                      SizedBox(width: 4,height: 4,),
                                       Text("${S.current.feels_like}: ${meteo.ressentie} ${meteo.measure}"),
                                     ],
                                   )
@@ -60,7 +68,9 @@ class WeatherResult extends StatelessWidget {
                             )
                           ),
                       ),
-              );     
+                ),
+              )
+            );     
   }
 }
 
@@ -72,5 +82,4 @@ class WeatherResult extends StatelessWidget {
     // - choix language (Donner la possibilité de choisir la language de l'appli)
     // - choix parametres (Donner la possibilité de choisir ses droits(rediriger vers les parametres de l'application en gros ))
     // - choix historique (Donner la possibilité de voir les précèdentes recherche fais sur la barre de recherche)
-// Background 
-    // - Adapter la card
+// Ameliorer les prévisions
