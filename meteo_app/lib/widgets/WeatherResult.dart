@@ -32,7 +32,7 @@ class WeatherResult extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: 
                                 [
-                                  Text(meteo.location, style: const TextStyle(fontSize: 24)), // Lieu choisi ou par default
+                                  Text(meteo.location, style: const TextStyle(fontSize: 24, color: Colors.white)), // Lieu choisi ou par default
                                   const SizedBox(height: 20),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
@@ -41,7 +41,7 @@ class WeatherResult extends StatelessWidget {
                                         Text('(${meteo.minimum}${meteo.measure})',style: const TextStyle(fontSize: 16, color: Colors.blue),),
                                       ),
                                       const SizedBox(width: 8,),
-                                      Text('${meteo.temperature}${meteo.measure}', style: const TextStyle(fontSize: 56, fontWeight: FontWeight.bold)),// température en Celsius
+                                      Text('${meteo.temperature}${meteo.measure}', style: const TextStyle(fontSize: 56, fontWeight: FontWeight.bold, color: Colors.white)),// température en Celsius
                                       const SizedBox(width: 8,),
                                       if(meteo.maximum > meteo.temperature.toDouble()) Flexible(child: 
                                         Text('(${meteo.maximum}${meteo.measure})',style: const TextStyle(fontSize: 16, color: Colors.red)),
@@ -57,11 +57,11 @@ class WeatherResult extends StatelessWidget {
                                         children: [
                                           Image.asset(Meteo.iconsForMeteo(meteo.icon),height: 32,width: 32), // Icon représentant le temps
                                           const SizedBox(width: 8),
-                                          Text(meteo.description, style: const TextStyle(fontSize: 16)), // Le temps sous sa forme
+                                          Text(meteo.description, style: const TextStyle(fontSize: 16, color: Colors.white)), // Le temps sous sa forme
                                         ]
                                       ),
                                       SizedBox(width: 4,height: 4,),
-                                      Text("${S.current.feels_like}: ${meteo.ressentie} ${meteo.measure}"),
+                                      Text("${S.current.feels_like}: ${meteo.ressentie} ${meteo.measure}", style: const TextStyle(color: Colors.white)),
                                     ],
                                   )
                                 ]

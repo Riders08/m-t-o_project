@@ -4,9 +4,11 @@ import 'package:intl/intl.dart';
 
 class LiveTime extends StatefulWidget {
   final DateTime time;
+  final Color color;
   const LiveTime({
     super.key,
     required this.time,
+    this.color = Colors.white,
   });
 
   @override
@@ -39,7 +41,7 @@ class _LiveTimeState extends State<LiveTime>{
     final localeTime = Localizations.localeOf(context).toString();
     final formatTimeLocale = DateFormat.jm(localeTime).format(_now);
     return Text(
-      formatTimeLocale, style: TextStyle(fontSize: 20),
+      formatTimeLocale, style: TextStyle(fontSize: 20,color: widget.color), 
     );
   }
 }

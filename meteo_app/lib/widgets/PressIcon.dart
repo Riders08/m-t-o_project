@@ -11,7 +11,7 @@ class PressIcon extends StatefulWidget{
     required this.icon,
     required this.onTap,
     required this.open,
-    this.color = Colors.black,  
+    this.color = Colors.white,  
   });
 
   @override

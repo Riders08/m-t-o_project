@@ -1,6 +1,7 @@
+import 'package:http/http.dart' as http;
+
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
-
 import '../generated/l10n.dart';
 
 class OutilsServices {
@@ -66,6 +67,17 @@ class OutilsServices {
       case "PL" : return "pl"; // Polonais
       case "UA" : return "uk"; // Ukrainien
       default : return "en"; // Anglais par défault
+    }
+  }
+
+  Future<bool> checkInternet() async {
+    try {
+      final response = await http.get(Uri.parse('https://www.google.com')).timeout(
+        const Duration(seconds: 3),
+      );
+      return response.statusCode == 200;
+    } catch (_) {
+      return false;
     }
   }
 

@@ -22,8 +22,6 @@ class PrevisionResult extends StatelessWidget{
               itemCount: prevision.previsions.length,
               itemBuilder: (context, index){
                 final preMeteo = prevision.previsions[index];
-                print("NOW: ${meteo.time}");
-                print("PRE: ${preMeteo.time}");
                 if(Meteo.sameDay(meteo.time, preMeteo.time)){
                   return ListTile(
                     leading: Image.asset(Meteo.iconsForMeteo(preMeteo.icon),height: 32, width: 32,),
