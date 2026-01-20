@@ -76,7 +76,19 @@ class _MeteoAppState extends State<MeteoApp>  {
             content: Text("Connexion Internet rétablie !"),
             duration: Duration(seconds: 4),
             behavior: SnackBarBehavior.floating,
-            margin: EdgeInsets.only(bottom: 700, left: 10, right: 10),
+            margin: EdgeInsets.only(bottom: 755, left: 10, right: 10),
+            backgroundColor: Colors.green,
+          ),
+        );
+        await _initMeteo();
+      }
+      if(_firstConnection && hasInternet && !_appReady){
+        _scaffoldMessageKey.currentState?.showSnackBar(
+          const SnackBar(
+            content: Text("Connexion Internet établie !"),
+            duration: Duration(seconds: 4),
+            behavior: SnackBarBehavior.floating,
+            margin: EdgeInsets.only(bottom: 755, left: 10, right: 10),
             backgroundColor: Colors.green,
           ),
         );
@@ -227,7 +239,7 @@ class _MeteoAppState extends State<MeteoApp>  {
               ),
               if (!_connected)
                 Positioned(
-                  bottom: 35,
+                  top: 30,
                   left: 20,
                   right: 20,
                   child: Container(
@@ -388,3 +400,6 @@ class _MeteoAppState extends State<MeteoApp>  {
     }
 }
 
+
+
+// Penser a finir les message de connection internet (faire en sorte que s'affiche bien en haut que l'on ne voit pas les deux a la fois)

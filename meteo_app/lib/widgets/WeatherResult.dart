@@ -82,4 +82,5 @@ class WeatherResult extends StatelessWidget {
     // - choix language (Donner la possibilité de choisir la language de l'appli)
     // - choix parametres (Donner la possibilité de choisir ses droits(rediriger vers les parametres de l'application en gros ))
     // - choix historique (Donner la possibilité de voir les précèdentes recherche fais sur la barre de recherche)
+
 // Ameliorer les prévisions
