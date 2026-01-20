@@ -47,6 +47,7 @@ class _MeteoAppState extends State<MeteoApp>  {
   final TextEditingController _cityController = TextEditingController();
   final GlobalKey<ScaffoldMessengerState> _scaffoldMessageKey = GlobalKey<ScaffoldMessengerState>();
 
+  String? _savePos;
   bool _drawerOpen = false;
   bool _appReady = false;
   bool _firstConnection = false;
@@ -100,6 +101,15 @@ class _MeteoAppState extends State<MeteoApp>  {
       _firstConnection = true;
     });
     _initMeteo();
+    _initLoad();
+  }
+
+
+  Future<void> _initLoad() async {
+    final data = await _outilsServices.loadMyPosition();
+    setState(() {
+      _savePos = data;
+    });
   }
 
   Future<void> _initNotification() async {
@@ -114,7 +124,16 @@ class _MeteoAppState extends State<MeteoApp>  {
 
   Future<void> _initMeteo() async {
     try{
-      await _loadfromLocationUser();
+      if(_savePos == null){
+        await _loadDefault();
+      }else{
+        final cities = await _cityResearchServices.searchCities(_savePos!);
+        if(cities.isEmpty){
+          await  _loadDefault();
+        }else{
+          _loadfromSelectedValue(cities.first);
+        }
+      }
     }catch(_){
     }
   }
@@ -130,11 +149,13 @@ class _MeteoAppState extends State<MeteoApp>  {
       final resultMeteo = await _meteoServices.fetchMeteo();
       final resultPrevision = await _previsionServices.fetchPrevision();
       setState(() {
+        _savePos = resultMeteo.location;
         _prevision = resultPrevision;
         _meteo = resultMeteo;
         _isloading = false;
         _appReady = true;
       });
+      _outilsServices.saveMyPosition(resultMeteo.location);
     }catch(e){
       setState(() {
         _error = e.toString();
@@ -150,12 +171,14 @@ class _MeteoAppState extends State<MeteoApp>  {
       final resultMeteo = await _meteoServices.fetchMeteoByCoordinatesWithLang(ville.latitude, ville.longitude);
       final resultPrevision = await _previsionServices.fetchPrevisionByCoordinatesWithLang(ville.latitude, ville.longitude);
       setState(() {
+        _savePos = resultMeteo.location;
         _prevision = resultPrevision;
         _meteo = resultMeteo;
         _languageCode = lang;
         _isloading = false;
         _error = null;
       });
+      _outilsServices.saveMyPosition(resultMeteo.location);
     }catch(e){
       setState(() {
         _error = S.current.cityNotFound;
@@ -174,6 +197,7 @@ class _MeteoAppState extends State<MeteoApp>  {
       final resultPrevision = await _previsionServices.fetchPrevisionByCoordinatesWithLang(position.latitude, position.longitude);
       
       setState(() {
+        _savePos = resultMeteo.location;
         _prevision = resultPrevision;
         _meteo = resultMeteo;
         _error = null;
@@ -181,6 +205,7 @@ class _MeteoAppState extends State<MeteoApp>  {
         _isloading = false;
         _appReady = true;
       });
+      _savePos = resultMeteo.location;
       return resultMeteo;
     }catch (e) {
       await _loadDefault();
@@ -399,7 +424,3 @@ class _MeteoAppState extends State<MeteoApp>  {
           );
     }
 }
-
-
-
-// Penser a finir les message de connection internet (faire en sorte que s'affiche bien en haut que l'on ne voit pas les deux a la fois)

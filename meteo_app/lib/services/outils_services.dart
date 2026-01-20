@@ -1,5 +1,6 @@
 import 'package:http/http.dart' as http;
 
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import '../generated/l10n.dart';
@@ -110,5 +111,15 @@ class OutilsServices {
                       throw Exception(S.current.getLocationTimeError);
                     }
                   );
+  }
+
+  Future<void> saveMyPosition(String ville) async {
+    final value = await SharedPreferences.getInstance();
+    await value.setString("ville", ville);
+  }
+
+  Future<String?> loadMyPosition() async{
+    final position = await SharedPreferences.getInstance();
+    return position.getString("ville");
   }
 }
