@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:meteo_app/models/savedPosition.dart';
 import 'package:meteo_app/services/cityResearch_services.dart';
 import 'package:meteo_app/services/notification_services.dart';
 
@@ -42,16 +43,20 @@ class MeteoApp extends StatefulWidget  {
 class _MeteoAppState extends State<MeteoApp>  {
   final MeteoServices _meteoServices = MeteoServices();
   final PrevisionServices _previsionServices = PrevisionServices();
-  final CityResearchServices _cityResearchServices = CityResearchServices();
   final OutilsServices _outilsServices = OutilsServices();
-  final TextEditingController _cityController = TextEditingController();
-  final GlobalKey<ScaffoldMessengerState> _scaffoldMessageKey = GlobalKey<ScaffoldMessengerState>();
 
-  String? _savePos;
+  final CityResearchServices _cityResearchServices = CityResearchServices();
+  final TextEditingController _cityController = TextEditingController();
+
+  final GlobalKey<ScaffoldMessengerState> _scaffoldMessageKey = GlobalKey<ScaffoldMessengerState>();
   bool _drawerOpen = false;
-  bool _appReady = false;
+
+  SavedPosition? _savePos;
   bool _firstConnection = false;
   bool _connected = false;
+
+  bool _appReady = false;
+  
   Prevision? _prevision;
   Meteo? _meteo;
   bool _isloading = true;
@@ -71,6 +76,7 @@ class _MeteoAppState extends State<MeteoApp>  {
     //Dynamique
     Connectivity().onConnectivityChanged.listen((result) async {
       bool hasInternet = await _outilsServices.checkInternet();
+      
       if(_firstConnection && hasInternet && _appReady){  
          _scaffoldMessageKey.currentState?.showSnackBar(
           const SnackBar(
@@ -81,7 +87,7 @@ class _MeteoAppState extends State<MeteoApp>  {
             backgroundColor: Colors.green,
           ),
         );
-        await _initMeteo();
+        await _initStart();
       }
       if(_firstConnection && hasInternet && !_appReady){
         _scaffoldMessageKey.currentState?.showSnackBar(
@@ -93,23 +99,25 @@ class _MeteoAppState extends State<MeteoApp>  {
             backgroundColor: Colors.green,
           ),
         );
-        await _initMeteo();
+        await _initStart();
       }
       setState(() => 
         _connected = hasInternet
       );
       _firstConnection = true;
     });
-    _initMeteo();
-    _initLoad();
+    _initStart();
   }
 
+  Future<void> _initStart() async {
+    _connected = await _outilsServices.checkInternet();
+    await _initLoad();   
+    await _initMeteo();
+  }
 
   Future<void> _initLoad() async {
     final data = await _outilsServices.loadMyPosition();
-    setState(() {
-      _savePos = data;
-    });
+    _savePos = data;
   }
 
   Future<void> _initNotification() async {
@@ -123,19 +131,18 @@ class _MeteoAppState extends State<MeteoApp>  {
   }
 
   Future<void> _initMeteo() async {
-    try{
-      if(_savePos == null){
-        await _loadDefault();
-      }else{
-        final cities = await _cityResearchServices.searchCities(_savePos!);
-        if(cities.isEmpty){
-          await  _loadDefault();
-        }else{
-          _loadfromSelectedValue(cities.first);
-        }
+    if(_connected){
+      try{
+        await _loadfromLocationUser();
+        return;
+      }catch(_){
       }
-    }catch(_){
     }
+    if(_savePos != null && _connected){
+      await _loadfromAlreadyPosition(_savePos!);
+      return;
+    }
+    await _loadDefault();
   }
 
   @override
@@ -149,13 +156,12 @@ class _MeteoAppState extends State<MeteoApp>  {
       final resultMeteo = await _meteoServices.fetchMeteo();
       final resultPrevision = await _previsionServices.fetchPrevision();
       setState(() {
-        _savePos = resultMeteo.location;
         _prevision = resultPrevision;
         _meteo = resultMeteo;
+        _languageCode = "fr";
         _isloading = false;
         _appReady = true;
       });
-      _outilsServices.saveMyPosition(resultMeteo.location);
     }catch(e){
       setState(() {
         _error = e.toString();
@@ -164,21 +170,46 @@ class _MeteoAppState extends State<MeteoApp>  {
     }
   }
 
-  Future<void> _loadfromSelectedValue(CityResearch ville) async {
+  Future<void> _loadfromAlreadyPosition(SavedPosition position) async{
     try{
-      final country = await _outilsServices.getCountryLocation(ville.latitude, ville.longitude);
-      final lang = await _outilsServices.langFromCountry(country);
-      final resultMeteo = await _meteoServices.fetchMeteoByCoordinatesWithLang(ville.latitude, ville.longitude);
-      final resultPrevision = await _previsionServices.fetchPrevisionByCoordinatesWithLang(ville.latitude, ville.longitude);
+      final country = await _outilsServices.getCountryLocation(position.latitude, position.longitude);
+      final lang = _outilsServices.langFromCountry(country);
+      final resultMeteo = await _meteoServices.fetchMeteoByCoordinatesWithLang(position.latitude,position.longitude);
+      final resultPrevision = await _previsionServices.fetchPrevisionByCoordinatesWithLang(position.latitude,position.longitude);
       setState(() {
-        _savePos = resultMeteo.location;
+        _savePos = position;
         _prevision = resultPrevision;
         _meteo = resultMeteo;
         _languageCode = lang;
         _isloading = false;
         _error = null;
+        _appReady = true;
       });
-      _outilsServices.saveMyPosition(resultMeteo.location);
+      _outilsServices.saveMyPosition(position);
+    }catch(e){
+      setState(() {
+        _error = S.current.cityNotFound;
+        _isloading = false;
+      });
+    }
+  }
+
+  Future<void> _loadfromSelectedValue(CityResearch ville) async {
+    try{
+      final country = await _outilsServices.getCountryLocation(ville.latitude, ville.longitude);
+      final lang = _outilsServices.langFromCountry(country);
+      final resultMeteo = await _meteoServices.fetchMeteoByCoordinatesWithLang(ville.latitude, ville.longitude);
+      final resultPrevision = await _previsionServices.fetchPrevisionByCoordinatesWithLang(ville.latitude, ville.longitude);
+      setState(() {
+        _savePos = SavedPosition(latitude: ville.latitude, longitude: ville.longitude);
+        _prevision = resultPrevision;
+        _meteo = resultMeteo;
+        _languageCode = lang;
+        _isloading = false;
+        _error = null;
+        _appReady = true;
+      });
+      _outilsServices.saveMyPosition(SavedPosition(latitude: ville.latitude, longitude: ville.longitude));
     }catch(e){
       setState(() {
         _error = S.current.cityNotFound;
@@ -191,13 +222,14 @@ class _MeteoAppState extends State<MeteoApp>  {
     try{
       final position = await _outilsServices.getPosition();
       final country = await _outilsServices.getCountryLocation(position.latitude, position.longitude);
-      final lang = await _outilsServices.langFromCountry(country);
+      final lang = _outilsServices.langFromCountry(country);
 
       final resultMeteo = await _meteoServices.fetchMeteoByCoordinatesWithLang(position.latitude, position.longitude);
       final resultPrevision = await _previsionServices.fetchPrevisionByCoordinatesWithLang(position.latitude, position.longitude);
       
+      final saved = SavedPosition(latitude: position.latitude, longitude: position.longitude);
       setState(() {
-        _savePos = resultMeteo.location;
+        _savePos = saved;
         _prevision = resultPrevision;
         _meteo = resultMeteo;
         _error = null;
@@ -205,10 +237,10 @@ class _MeteoAppState extends State<MeteoApp>  {
         _isloading = false;
         _appReady = true;
       });
-      _savePos = resultMeteo.location;
+      await _outilsServices.saveMyPosition(saved);
+      _savePos = saved;
       return resultMeteo;
     }catch (e) {
-      await _loadDefault();
       setState(() {
         _languageCode = "en";
         _error = S.current.locationError;

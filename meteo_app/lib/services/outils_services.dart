@@ -1,4 +1,5 @@
 import 'package:http/http.dart' as http;
+import 'package:meteo_app/models/savedPosition.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:geocoding/geocoding.dart';
@@ -113,13 +114,26 @@ class OutilsServices {
                   );
   }
 
-  Future<void> saveMyPosition(String ville) async {
+  Future<void> saveMyPosition(SavedPosition position) async {
     final value = await SharedPreferences.getInstance();
-    await value.setString("ville", ville);
+    value.setDouble("lon", position.longitude);
+    value.setDouble("lat", position.latitude);
   }
 
-  Future<String?> loadMyPosition() async{
+  Future<SavedPosition?> loadMyPosition() async{
     final position = await SharedPreferences.getInstance();
-    return position.getString("ville");
+    final lat = position.getDouble("lat");
+    final lon = position.getDouble("lon");
+    if(lat == null || lon == null){
+      return null;
+    }else{
+      return SavedPosition(latitude: lat, longitude: lon);
+    }
   }
+
+  Future<bool> hasLocationPermission() async {
+    final permission = await Geolocator.checkPermission();
+    return permission == LocationPermission.always || permission == LocationPermission.whileInUse;
+  }
+
 }
