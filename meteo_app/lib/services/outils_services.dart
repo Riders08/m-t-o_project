@@ -83,6 +83,22 @@ class OutilsServices {
     }
   }
 
+  Future<bool> activateLocalisation() async {
+    return  await Geolocator.isLocationServiceEnabled();
+  }
+
+  Future<bool> autoriwedLocalisation() async {
+    LocationPermission autoriwed = await Geolocator.checkPermission();
+    if(autoriwed != LocationPermission.denied && autoriwed != LocationPermission.deniedForever){
+      return true;
+    } 
+    return false;
+  }
+
+  Future<void> demandLocalisation() async {
+    await Geolocator.requestPermission();
+  }
+
   Future<Position> getPosition() async {
     LocationPermission autoriwed;
     bool serviceEnable;

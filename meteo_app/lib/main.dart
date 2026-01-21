@@ -440,12 +440,39 @@ class _MeteoAppState extends State<MeteoApp>  {
                   ),
                 ),
               ),
-              floatingActionButton: FloatingActionButton(onPressed:(){ // Bouton qui remet a jour avec la localisation
-                                      _loadfromLocationUser();
-                                      setState(() {
-                                        FocusManager.instance.primaryFocus?.unfocus();
-                                        _cityController.clear();
-                                      });
+              floatingActionButton: FloatingActionButton(onPressed:() async { // Bouton qui remet a jour avec la localisation
+                                      if(await _outilsServices.autoriwedLocalisation()){
+                                        if(await _outilsServices.activateLocalisation()){
+                                          _loadfromLocationUser();
+                                          setState(() {
+                                            FocusManager.instance.primaryFocus?.unfocus();
+                                            _cityController.clear();
+                                          });
+                                        }else{
+                                          _scaffoldMessageKey.currentState?.showSnackBar(
+                                            const SnackBar(
+                                              content: Text("Votre localisation est désactivé !"),
+                                              duration: Duration(seconds: 2),
+                                              behavior: SnackBarBehavior.floating,
+                                              margin: EdgeInsets.only(bottom: 30, left: 10, right: 10),
+                                              backgroundColor: Colors.deepOrange,
+                                            ),
+                                          );
+                                        }
+                                      }else{
+                                        await _outilsServices.demandLocalisation();
+                                        if (!await _outilsServices.autoriwedLocalisation()) {
+                                          _scaffoldMessageKey.currentState?.showSnackBar(
+                                            const SnackBar(
+                                              content: Text("Permission localisation refusée !"),
+                                              duration: Duration(seconds: 2),
+                                              behavior: SnackBarBehavior.floating,
+                                              margin: EdgeInsets.only(bottom: 30, left: 10, right: 10),
+                                              backgroundColor: Colors.deepOrange,
+                                            ),
+                                          );
+                                        }
+                                      }
                                     }, 
                                     backgroundColor: Colors.blue,
                                     child: Icon(FontAwesomeIcons.locationDot, color: Colors.white,),
