@@ -76,12 +76,22 @@ class _MeteoAppState extends State<MeteoApp>  {
     //Dynamique
     Connectivity().onConnectivityChanged.listen((result) async {
       bool hasInternet = await _outilsServices.checkInternet();
-      
+      if(!hasInternet){
+        _scaffoldMessageKey.currentState?.showSnackBar(
+          const SnackBar(
+            content: Text("Pas de connection internet"),
+            duration: Duration(seconds: 2),
+            behavior: SnackBarBehavior.floating,
+            margin: EdgeInsets.only(bottom: 755, left: 10, right: 10),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
       if(_firstConnection && hasInternet && _appReady){  
          _scaffoldMessageKey.currentState?.showSnackBar(
           const SnackBar(
             content: Text("Connexion Internet rétablie !"),
-            duration: Duration(seconds: 4),
+            duration: Duration(seconds: 2),
             behavior: SnackBarBehavior.floating,
             margin: EdgeInsets.only(bottom: 755, left: 10, right: 10),
             backgroundColor: Colors.green,
@@ -93,7 +103,7 @@ class _MeteoAppState extends State<MeteoApp>  {
         _scaffoldMessageKey.currentState?.showSnackBar(
           const SnackBar(
             content: Text("Connexion Internet établie !"),
-            duration: Duration(seconds: 4),
+            duration: Duration(seconds: 2),
             behavior: SnackBarBehavior.floating,
             margin: EdgeInsets.only(bottom: 755, left: 10, right: 10),
             backgroundColor: Colors.green,
@@ -279,41 +289,13 @@ class _MeteoAppState extends State<MeteoApp>  {
 
   Widget _buildSplashHome() {
     return Scaffold(
-      body: _connected ?
+      body:
         SizedBox.expand(
           child: Image.asset(
             "assets/home.jpg",
             fit: BoxFit.cover,
           ),
         )
-        : Stack(
-            children: [
-              SizedBox.expand(
-                child: Image.asset(
-                          "assets/home.jpg", 
-                          fit: BoxFit.cover
-                        ),
-              ),
-              if (!_connected)
-                Positioned(
-                  top: 30,
-                  left: 20,
-                  right: 20,
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
-                    decoration: BoxDecoration(
-                      color: Colors.red,
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: const Text(
-                      "Pas de connexion Internet",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                ),
-            ],
-          ) 
     );
   }
   
@@ -455,7 +437,7 @@ class _MeteoAppState extends State<MeteoApp>  {
                                               duration: Duration(seconds: 2),
                                               behavior: SnackBarBehavior.floating,
                                               margin: EdgeInsets.only(bottom: 30, left: 10, right: 10),
-                                              backgroundColor: Colors.deepOrange,
+                                              backgroundColor: Colors.blue,
                                             ),
                                           );
                                         }
@@ -468,7 +450,7 @@ class _MeteoAppState extends State<MeteoApp>  {
                                               duration: Duration(seconds: 2),
                                               behavior: SnackBarBehavior.floating,
                                               margin: EdgeInsets.only(bottom: 30, left: 10, right: 10),
-                                              backgroundColor: Colors.deepOrange,
+                                              backgroundColor: Colors.blue,
                                             ),
                                           );
                                         }

@@ -84,5 +84,3 @@ class WeatherResult extends StatelessWidget {
     // - choix historique (Donner la possibilité de voir les précèdentes recherche fais sur la barre de recherche)
 
 // Ameliorer les prévisions
-
-// Faire en sorte de regler le cache des messages de connection
