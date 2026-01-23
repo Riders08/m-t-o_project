@@ -137,4 +137,12 @@ class Meteo{
   static bool sameDay(DateTime today, DateTime check){
      return today.year == check.year && today.month == check.month && today.day == check.day;
   }
+
+  static DateTime nextDay(DateTime locale){
+    return DateTime(locale.year, locale.month, locale.day+1, 0 , 0, 0);
+  }
+
+  static bool isAfter(DateTime a, DateTime b){
+    return a.isAfter(b);
+  }
 }
