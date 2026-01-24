@@ -50,5 +50,6 @@ class MessageLookup extends MessageLookupByLibrary {
       "Standortberechtigung dauerhaft verweigert.",
     ),
     "place": MessageLookupByLibrary.simpleMessage("Stadt/Land"),
+    "previsions": MessageLookupByLibrary.simpleMessage("5-Tage-Vorhersage"),
   };
 }

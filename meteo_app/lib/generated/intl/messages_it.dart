@@ -48,5 +48,6 @@ class MessageLookup extends MessageLookupByLibrary {
       "Autorizzazione alla posizione negata in modo permanente.",
     ),
     "place": MessageLookupByLibrary.simpleMessage("Città/Paese"),
+    "previsions": MessageLookupByLibrary.simpleMessage("Previsioni a 5 giorni"),
   };
 }

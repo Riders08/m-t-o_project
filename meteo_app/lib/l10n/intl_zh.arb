@@ -14,5 +14,7 @@
 
   "place": "城市/国家",
   
-  "feels_like": "体感"
+  "feels_like": "体感",
+
+  "previsions": "5天天气预报"
 }

@@ -14,5 +14,7 @@
 
   "place": "Stad/Land",
   
-  "feels_like": "Gevoeld"
+  "feels_like": "Gevoeld",
+
+  "previsions": "5-daagse voorspelling"
 }

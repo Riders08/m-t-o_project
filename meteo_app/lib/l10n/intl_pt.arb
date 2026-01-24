@@ -14,5 +14,7 @@
 
   "place": "Cidade/País",
   
-  "feels_like": "Sensação"
+  "feels_like": "Sensação",
+
+  "previsions": "Previsão para 5 dias"
 }

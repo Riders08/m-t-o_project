@@ -25,7 +25,7 @@ class PrevisionContent extends StatelessWidget{
     if(error != null){
       return Text(error!);
     }
-    return PrevisionResult(meteo: meteo!,prevision: prevision!);
+    return PrevisionResult(meteo: meteo!,prevision: prevision!,);
   }
 
 }

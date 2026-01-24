@@ -14,5 +14,7 @@
 
   "place" : "Ville/Pays",
   
-  "feels_like": "Ressentie"
+  "feels_like": "Ressentie",
+
+  "previsions": "Prévision sur 5 jours"
 }

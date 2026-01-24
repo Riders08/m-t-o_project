@@ -14,5 +14,7 @@
 
   "place": "都市／国",
   
-  "feels_like": "体感温度"
+  "feels_like": "体感温度",
+
+  "previsions": "5日間予報"
 }

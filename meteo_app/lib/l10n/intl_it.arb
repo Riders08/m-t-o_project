@@ -14,5 +14,7 @@
 
   "place": "Città/Paese",
   
-  "feels_like": "Percepita"
+  "feels_like": "Percepita",
+
+  "previsions": "Previsioni a 5 giorni"
 }

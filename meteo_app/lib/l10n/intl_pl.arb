@@ -14,5 +14,7 @@
 
   "place": "Miasto/Kraj",
   
-  "feels_like": "Odczuwalna"
+  "feels_like": "Odczuwalna",
+
+  "previsions": "Prognoza na 5 dni"
 }

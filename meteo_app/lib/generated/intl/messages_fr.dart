@@ -48,5 +48,6 @@ class MessageLookup extends MessageLookupByLibrary {
       "Permission de récupération de localisation refusée définitivement.",
     ),
     "place": MessageLookupByLibrary.simpleMessage("Ville/Pays"),
+    "previsions": MessageLookupByLibrary.simpleMessage("Prévision sur 5 jours"),
   };
 }

@@ -46,5 +46,6 @@ class MessageLookup extends MessageLookupByLibrary {
       "위치 정보 권한이 영구적으로 거부되었습니다.",
     ),
     "place": MessageLookupByLibrary.simpleMessage("도시/국가"),
+    "previsions": MessageLookupByLibrary.simpleMessage("5일 예보"),
   };
 }

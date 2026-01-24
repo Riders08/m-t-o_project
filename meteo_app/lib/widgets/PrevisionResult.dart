@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:meteo_app/models/prevision.dart';
 import 'package:meteo_app/models/meteo.dart';
+import 'package:meteo_app/widgets/PressIcon.dart';
 
+import 'dart:ui';
+import '../generated/l10n.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class PrevisionResult extends StatelessWidget{
   final Meteo meteo;
@@ -10,7 +14,7 @@ class PrevisionResult extends StatelessWidget{
   const PrevisionResult({
     super.key,
     required this.meteo,
-    required this.prevision
+    required this.prevision,
   });
 
   @override
@@ -59,6 +63,49 @@ class PrevisionResult extends StatelessWidget{
               );                
             }
         ),
+        const SizedBox(height: 30,),
+        Center(
+            child: ClipRRect(
+              borderRadius: BorderRadiusGeometry.circular(16.0),
+              child: Card(
+                      color: Color.fromARGB(26, 255, 255, 255),
+                      elevation: 4,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(20),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(S.current.previsions, style: TextStyle(fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold)),
+                            PressIcon(
+                              icon: FontAwesomeIcons.caretRight,//FontAwesomeIcons.caretDown 
+                              open: false,
+                              onTap: () async {
+                                print("SLURP!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+                                ListView.builder(
+                                    shrinkWrap: true,
+                                    physics: const NeverScrollableScrollPhysics(),
+                                    itemCount: displayPrevisionsExtension.length,
+                                    itemBuilder: (context, index){
+                                      final preMeteoExtension = displayPrevisionsExtension[index];
+                                      return ListTile(
+                                        leading: Image.asset(Meteo.iconsForMeteo(preMeteoExtension.icon),height: 32, width: 32,),
+                                        title: Text(Meteo.getDisplayTime(preMeteoExtension.time, localeTime), style: TextStyle(color: Colors.white ,fontWeight: FontWeight.bold),  ),
+                                        subtitle: Text(preMeteoExtension.description, style: TextStyle(color: Colors.white),),
+                                        trailing: Text("${preMeteoExtension.temperature}${preMeteoExtension.measure}", style: TextStyle(color: Colors.white ,fontSize: 25),),
+                                      );                
+                                    }
+                                );
+                              }
+                            ),   
+                          ],
+                        ) 
+                      ),
+              ),
+            )
+          )
       ],
     );
   }

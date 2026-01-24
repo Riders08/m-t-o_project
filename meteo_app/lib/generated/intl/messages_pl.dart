@@ -50,5 +50,6 @@ class MessageLookup extends MessageLookupByLibrary {
       "Pozwolenie na lokalizację zostało trwale odrzucone.",
     ),
     "place": MessageLookupByLibrary.simpleMessage("Miasto/Kraj"),
+    "previsions": MessageLookupByLibrary.simpleMessage("Prognoza na 5 dni"),
   };
 }

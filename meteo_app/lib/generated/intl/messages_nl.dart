@@ -48,5 +48,6 @@ class MessageLookup extends MessageLookupByLibrary {
       "Locatietoestemming permanent geweigerd.",
     ),
     "place": MessageLookupByLibrary.simpleMessage("Stad/Land"),
+    "previsions": MessageLookupByLibrary.simpleMessage("5-daagse voorspelling"),
   };
 }

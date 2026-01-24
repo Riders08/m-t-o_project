@@ -48,5 +48,6 @@ class MessageLookup extends MessageLookupByLibrary {
       "Location permission permanently denied.",
     ),
     "place": MessageLookupByLibrary.simpleMessage("City/Country"),
+    "previsions": MessageLookupByLibrary.simpleMessage("5-day forecast"),
   };
 }

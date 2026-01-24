@@ -153,6 +153,16 @@ class S {
   String get feels_like {
     return Intl.message('Feels like', name: 'feels_like', desc: '', args: []);
   }
+
+  /// `5-day forecast`
+  String get previsions {
+    return Intl.message(
+      '5-day forecast',
+      name: 'previsions',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

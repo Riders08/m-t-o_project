@@ -48,5 +48,6 @@ class MessageLookup extends MessageLookupByLibrary {
       "Разрешение на доступ к местоположению было окончательно отклонено.",
     ),
     "place": MessageLookupByLibrary.simpleMessage("Город/Страна"),
+    "previsions": MessageLookupByLibrary.simpleMessage("Прогноз на 5 дней"),
   };
 }

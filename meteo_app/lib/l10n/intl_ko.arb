@@ -14,5 +14,7 @@
 
   "place": "도시/국가",
   
-  "feels_like": "체감온도"
+  "feels_like": "체감온도",
+
+  "previsions": "5일 예보"
 }

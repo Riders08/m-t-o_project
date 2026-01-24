@@ -38,5 +38,6 @@ class MessageLookup extends MessageLookupByLibrary {
       "位置权限被永久拒绝。",
     ),
     "place": MessageLookupByLibrary.simpleMessage("城市/国家"),
+    "previsions": MessageLookupByLibrary.simpleMessage("5天天气预报"),
   };
 }

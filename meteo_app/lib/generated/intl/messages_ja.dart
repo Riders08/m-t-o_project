@@ -44,5 +44,6 @@ class MessageLookup extends MessageLookupByLibrary {
       "位置情報の権限が永久に拒否されました。",
     ),
     "place": MessageLookupByLibrary.simpleMessage("都市／国"),
+    "previsions": MessageLookupByLibrary.simpleMessage("5日間予報"),
   };
 }

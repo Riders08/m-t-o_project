@@ -48,5 +48,6 @@ class MessageLookup extends MessageLookupByLibrary {
       "Дозвіл на місцезнаходження остаточно відхилено.",
     ),
     "place": MessageLookupByLibrary.simpleMessage("Місто/Країна"),
+    "previsions": MessageLookupByLibrary.simpleMessage("Прогноз на 5 днів"),
   };
 }
