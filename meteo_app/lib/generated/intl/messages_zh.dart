@@ -32,6 +32,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "getDataAPIError": MessageLookupByLibrary.simpleMessage("无法从 API 获取数据！"),
     "getLocationError": MessageLookupByLibrary.simpleMessage("获取您的位置时出错"),
     "getLocationTimeError": MessageLookupByLibrary.simpleMessage("获取您的位置耗时过长"),
+    "history": MessageLookupByLibrary.simpleMessage("历史"),
+    "language": MessageLookupByLibrary.simpleMessage("语言"),
     "locationError": MessageLookupByLibrary.simpleMessage("无法获取您的位置"),
     "locationNotActive": MessageLookupByLibrary.simpleMessage("您的位置已禁用"),
     "permissionLocationError": MessageLookupByLibrary.simpleMessage(
@@ -39,5 +41,8 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "place": MessageLookupByLibrary.simpleMessage("城市/国家"),
     "previsions": MessageLookupByLibrary.simpleMessage("5天天气预报"),
+    "settings": MessageLookupByLibrary.simpleMessage("设置"),
+    "theme": MessageLookupByLibrary.simpleMessage("主题"),
+    "wallpaper": MessageLookupByLibrary.simpleMessage("壁纸"),
   };
 }

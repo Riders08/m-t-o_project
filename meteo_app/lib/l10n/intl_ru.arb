@@ -16,5 +16,11 @@
 
   "feels_like": "Ощущается как",
 
-  "previsions": "Прогноз на 5 дней"
+  "previsions": "Прогноз на 5 дней",
+
+  "language": "Язык",
+  "history" : "История",
+  "wallpaper" : "Обои",
+  "theme" : "Тема",
+  "settings" : "Настройки"
 }

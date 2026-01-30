@@ -16,5 +16,11 @@
   
   "feels_like": "Feels like",
 
-  "previsions": "5-day forecast"
+  "previsions": "5-day forecast",
+
+  "language": "Language",
+  "history" : "History",
+  "wallpaper" : "Wallpaper",
+  "theme" : "Theme",
+  "settings" : "Settings"
 }

@@ -16,5 +16,11 @@
   
   "feels_like": "体感",
 
-  "previsions": "5天天气预报"
+  "previsions": "5天天气预报",
+
+  "language": "语言",
+  "history" : "历史",
+  "wallpaper" : "壁纸",
+  "theme" : "主题",
+  "settings" : "设置"
 }

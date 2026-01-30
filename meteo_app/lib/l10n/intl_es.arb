@@ -16,5 +16,11 @@
   
   "feels_like": "Sensación",
 
-  "previsions": "Previsión a 5 días"
+  "previsions": "Previsión a 5 días",
+
+  "language": "Lengua",
+  "history" : "Histórico",
+  "wallpaper" : "Fondo de pantalla",
+  "theme" : "Tema",
+  "settings" : "Configuración"
 }

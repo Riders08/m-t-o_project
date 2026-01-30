@@ -16,5 +16,11 @@
   
   "feels_like": "Odczuwalna",
 
-  "previsions": "Prognoza na 5 dni"
+  "previsions": "Prognoza na 5 dni",
+
+  "language": "Język",
+  "history" : "Historia",
+  "wallpaper" : "Tapeta",
+  "theme" : "Motyw",
+  "settings" : "Ustawienia"
 }

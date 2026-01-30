@@ -14,6 +14,7 @@ import 'package:meteo_app/services/prevision_services.dart';
 
 import 'package:meteo_app/widgets/CityResearchWidgets.dart';
 import 'package:meteo_app/widgets/PressIcon.dart';
+import 'package:meteo_app/widgets/menu.dart';
 import 'package:meteo_app/widgets/PrevisionContent.dart';
 import 'package:meteo_app/widgets/WeatherContent.dart';
 
@@ -324,30 +325,9 @@ class _MeteoAppState extends State<MeteoApp>  {
               });
             },
             drawer: Drawer(
-                    backgroundColor: Colors.blue,
-                    child: ListView(
-                            scrollDirection: Axis.vertical,
-                            padding: EdgeInsets.zero,
-                            children: [
-                              DrawerHeader(
-                                decoration: BoxDecoration(color: const Color.fromARGB(255, 255, 255, 255)),
-                                child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          Title(color: Colors.black ,child: Text(S.current.appTitle, style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold, color: Colors.grey),)),
-                                          Column(
-                                            mainAxisAlignment: MainAxisAlignment.center,
-                                            children: [
-                                              Text("data"),
-                                              Text("datrhzrhzrha"),
-                                            ],
-                                          ),
-                                        ],
-                                      )      
-                              )
-                            ],
-                          ),
-                    ),
+                  backgroundColor: Colors.blue,
+                  child: Menu()
+                ),
             appBar: 
               AppBar(
               backgroundColor: Colors.blue,

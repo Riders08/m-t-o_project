@@ -16,5 +16,11 @@
   
   "feels_like": "Відчувається як",
 
-  "previsions": "Прогноз на 5 днів"
+  "previsions": "Прогноз на 5 днів",
+
+  "language": "Мова",
+  "history" : "Історія",
+  "wallpaper" : "Шпалери",
+  "theme" : "Тема",
+  "settings" : "Налаштування"
 }

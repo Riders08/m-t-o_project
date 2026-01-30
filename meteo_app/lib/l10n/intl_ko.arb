@@ -16,5 +16,11 @@
   
   "feels_like": "체감온도",
 
-  "previsions": "5일 예보"
+  "previsions": "5일 예보",
+
+  "language": "언어",
+  "history" : "기록",
+  "wallpaper" : "배경화면",
+  "theme" : "테마",
+  "settings" : "설정"
 }

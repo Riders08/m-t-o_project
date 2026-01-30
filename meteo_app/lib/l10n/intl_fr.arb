@@ -16,5 +16,11 @@
   
   "feels_like": "Ressentie",
 
-  "previsions": "Prévision sur 5 jours"
+  "previsions": "Prévision sur 5 jours",
+
+  "language": "Langue",
+  "history" : "Historique",
+  "wallpaper" : "Fond d'écran",
+  "theme" : "Thème",
+  "settings" : "Paramètres"
 }

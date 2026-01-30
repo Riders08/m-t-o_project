@@ -38,6 +38,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "getLocationTimeError": MessageLookupByLibrary.simpleMessage(
       "Het ophalen van je locatie heeft te lang geduurd",
     ),
+    "history": MessageLookupByLibrary.simpleMessage("Historiek"),
+    "language": MessageLookupByLibrary.simpleMessage("Taal"),
     "locationError": MessageLookupByLibrary.simpleMessage(
       "Kan je locatie niet ophalen",
     ),
@@ -49,5 +51,8 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "place": MessageLookupByLibrary.simpleMessage("Stad/Land"),
     "previsions": MessageLookupByLibrary.simpleMessage("5-daagse voorspelling"),
+    "settings": MessageLookupByLibrary.simpleMessage("Instellingen"),
+    "theme": MessageLookupByLibrary.simpleMessage("Thema"),
+    "wallpaper": MessageLookupByLibrary.simpleMessage("Achtergrond"),
   };
 }

@@ -16,5 +16,11 @@
   
   "feels_like": "Gevoeld",
 
-  "previsions": "5-daagse voorspelling"
+  "previsions": "5-daagse voorspelling",
+
+  "language": "Taal",
+  "history" : "Historiek",
+  "wallpaper" : "Achtergrond",
+  "theme" : "Thema",
+  "settings" : "Instellingen"
 }

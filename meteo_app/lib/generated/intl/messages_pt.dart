@@ -40,6 +40,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "getLocationTimeError": MessageLookupByLibrary.simpleMessage(
       "A recuperação da sua localização demorou muito",
     ),
+    "history": MessageLookupByLibrary.simpleMessage("Histórico"),
+    "language": MessageLookupByLibrary.simpleMessage("Língua"),
     "locationError": MessageLookupByLibrary.simpleMessage(
       "Não foi possível obter sua localização",
     ),
@@ -51,5 +53,8 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "place": MessageLookupByLibrary.simpleMessage("Cidade/País"),
     "previsions": MessageLookupByLibrary.simpleMessage("Previsão para 5 dias"),
+    "settings": MessageLookupByLibrary.simpleMessage("Configurações"),
+    "theme": MessageLookupByLibrary.simpleMessage("Tema"),
+    "wallpaper": MessageLookupByLibrary.simpleMessage("Papel de parede"),
   };
 }

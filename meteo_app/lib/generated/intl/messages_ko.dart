@@ -38,6 +38,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "getLocationTimeError": MessageLookupByLibrary.simpleMessage(
       "위치 정보를 가져오는 데 시간이 너무 오래 걸렸습니다",
     ),
+    "history": MessageLookupByLibrary.simpleMessage("기록"),
+    "language": MessageLookupByLibrary.simpleMessage("언어"),
     "locationError": MessageLookupByLibrary.simpleMessage("현재 위치를 가져올 수 없습니다"),
     "locationNotActive": MessageLookupByLibrary.simpleMessage(
       "위치 정보가 비활성화되어 있습니다",
@@ -47,5 +49,8 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "place": MessageLookupByLibrary.simpleMessage("도시/국가"),
     "previsions": MessageLookupByLibrary.simpleMessage("5일 예보"),
+    "settings": MessageLookupByLibrary.simpleMessage("설정"),
+    "theme": MessageLookupByLibrary.simpleMessage("테마"),
+    "wallpaper": MessageLookupByLibrary.simpleMessage("배경화면"),
   };
 }

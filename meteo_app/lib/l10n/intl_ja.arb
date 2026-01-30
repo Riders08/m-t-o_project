@@ -16,5 +16,11 @@
   
   "feels_like": "体感温度",
 
-  "previsions": "5日間予報"
+  "previsions": "5日間予報",
+
+  "language": "言語",
+  "history" : "履歴",
+  "wallpaper" : "壁紙",
+  "theme" : "テーマ",
+  "settings" : "設定"
 }

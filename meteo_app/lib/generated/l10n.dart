@@ -163,6 +163,31 @@ class S {
       args: [],
     );
   }
+
+  /// `Language`
+  String get language {
+    return Intl.message('Language', name: 'language', desc: '', args: []);
+  }
+
+  /// `History`
+  String get history {
+    return Intl.message('History', name: 'history', desc: '', args: []);
+  }
+
+  /// `Wallpaper`
+  String get wallpaper {
+    return Intl.message('Wallpaper', name: 'wallpaper', desc: '', args: []);
+  }
+
+  /// `Theme`
+  String get theme {
+    return Intl.message('Theme', name: 'theme', desc: '', args: []);
+  }
+
+  /// `Settings`
+  String get settings {
+    return Intl.message('Settings', name: 'settings', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
