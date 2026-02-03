@@ -8,6 +8,8 @@ import 'package:meteo_app/models/meteo.dart';
 import 'package:meteo_app/models/prevision.dart';
 import 'package:meteo_app/models/cityResearch.dart';
 
+import 'package:meteo_app/enum/MenuPage.dart';
+
 import 'package:meteo_app/services/outils_services.dart';
 import 'package:meteo_app/services/meteo_services.dart';
 import 'package:meteo_app/services/prevision_services.dart';
@@ -51,6 +53,7 @@ class _MeteoAppState extends State<MeteoApp>  {
 
   final GlobalKey<ScaffoldMessengerState> _scaffoldMessageKey = GlobalKey<ScaffoldMessengerState>();
   bool _drawerOpen = false;
+  MenuPage _currentPage = MenuPage.home;
 
   SavedPosition? _savePos;
   bool _firstConnection = false;
@@ -160,6 +163,13 @@ class _MeteoAppState extends State<MeteoApp>  {
   void dispose(){
     _cityController.dispose();
     super.dispose();
+  }
+
+  void _changePage(MenuPage page){
+    setState(() {
+      _currentPage = page;
+    });
+    Navigator.pop(context);
   }
 
   Future<void> _loadDefault() async {
@@ -326,7 +336,9 @@ class _MeteoAppState extends State<MeteoApp>  {
             },
             drawer: Drawer(
                   backgroundColor: Colors.blue,
-                  child: Menu()
+                  child: Menu(
+                    selectedPage: _currentPage,
+                    onItemSelected: _changePage,)
                 ),
             appBar: 
               AppBar(
@@ -371,31 +383,7 @@ class _MeteoAppState extends State<MeteoApp>  {
                           physics: const AlwaysScrollableScrollPhysics(),
                           child: Padding(
                                   padding: const EdgeInsets.all(16.0),
-                                  child: Column(
-                                    children: 
-                                      [
-                                        CityResearchWidgets(cityController: _cityController, cityResearchServices: _cityResearchServices, // Barre de recherche
-                                                      onSubmitted: (value){
-                                                        setState(() =>
-                                                          _isloading = true);
-                                                        _loadfromSelectedValue(value);
-                                                      },
-                                          ),
-                                        const SizedBox(height: 20),
-                                        WeatherContent( // Le temps actuelle
-                                          isLoading : _isloading,
-                                          error : _error,
-                                          meteo :  _meteo,
-                                        ),
-                                        const SizedBox(height: 20),
-                                        PrevisionContent( //Les previsions
-                                          isLoading: _isloading, 
-                                          error: _error, 
-                                          meteo: _meteo,
-                                          prevision: _prevision,
-                                        ),
-                                      ]  
-                                  ),      
+                                  child: _buildPageContent(),  
                                 ),
                           )
                       ,)
@@ -443,5 +431,47 @@ class _MeteoAppState extends State<MeteoApp>  {
               ),
             ],
           );
+  }
+
+  Widget _buildPageContent(){
+    switch (_currentPage) {
+      case MenuPage.home:
+        return Column(
+          children: [
+            CityResearchWidgets(
+              cityController: _cityController,
+              cityResearchServices: _cityResearchServices,
+              onSubmitted: (value) {
+                setState(() => _isloading = true);
+                _loadfromSelectedValue(value);
+              },
+            ),
+            const SizedBox(height: 20),
+            WeatherContent(isLoading: _isloading, error: _error, meteo: _meteo),
+            const SizedBox(height: 20),
+            PrevisionContent(
+              isLoading: _isloading,
+              error: _error,
+              meteo: _meteo,
+              prevision: _prevision,
+            ),
+          ],
+        );
+
+      case MenuPage.history:
+        return const Center(child: Text("History Page"));
+
+      case MenuPage.language:
+        return const Center(child: Text("Language Page"));
+
+      case MenuPage.settings:
+        return const Center(child: Text("Settings Page"));
+
+      case MenuPage.theme:
+        return const Center(child: Text("Theme Page"));
+
+      case MenuPage.wallpaper:
+        return const Center(child: Text("Wallpaper Page"));
     }
+  }
 }

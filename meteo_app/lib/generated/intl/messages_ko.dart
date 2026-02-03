@@ -39,6 +39,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "위치 정보를 가져오는 데 시간이 너무 오래 걸렸습니다",
     ),
     "history": MessageLookupByLibrary.simpleMessage("기록"),
+    "home": MessageLookupByLibrary.simpleMessage("홈"),
     "language": MessageLookupByLibrary.simpleMessage("언어"),
     "locationError": MessageLookupByLibrary.simpleMessage("현재 위치를 가져올 수 없습니다"),
     "locationNotActive": MessageLookupByLibrary.simpleMessage(

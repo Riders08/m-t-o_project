@@ -39,6 +39,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Het ophalen van je locatie heeft te lang geduurd",
     ),
     "history": MessageLookupByLibrary.simpleMessage("Historiek"),
+    "home": MessageLookupByLibrary.simpleMessage("Start"),
     "language": MessageLookupByLibrary.simpleMessage("Taal"),
     "locationError": MessageLookupByLibrary.simpleMessage(
       "Kan je locatie niet ophalen",

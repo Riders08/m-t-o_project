@@ -41,6 +41,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Pobranie Twojej lokalizacji zajęło za dużo czasu",
     ),
     "history": MessageLookupByLibrary.simpleMessage("Historia"),
+    "home": MessageLookupByLibrary.simpleMessage("Strona główna"),
     "language": MessageLookupByLibrary.simpleMessage("Język"),
     "locationError": MessageLookupByLibrary.simpleMessage(
       "Nie można pobrać Twojej lokalizacji",

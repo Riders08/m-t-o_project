@@ -41,6 +41,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Das Abrufen deines Standorts hat zu lange gedauert",
     ),
     "history": MessageLookupByLibrary.simpleMessage("Verlauf"),
+    "home": MessageLookupByLibrary.simpleMessage("Startseite"),
     "language": MessageLookupByLibrary.simpleMessage("Sprache"),
     "locationError": MessageLookupByLibrary.simpleMessage(
       "Standort konnte nicht ermittelt werden",

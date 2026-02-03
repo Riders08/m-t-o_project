@@ -39,6 +39,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "位置情報の取得に時間がかかりすぎました",
     ),
     "history": MessageLookupByLibrary.simpleMessage("履歴"),
+    "home": MessageLookupByLibrary.simpleMessage("ホーム"),
     "language": MessageLookupByLibrary.simpleMessage("言語"),
     "locationError": MessageLookupByLibrary.simpleMessage("現在地を取得できません"),
     "locationNotActive": MessageLookupByLibrary.simpleMessage("位置情報が無効になっています"),

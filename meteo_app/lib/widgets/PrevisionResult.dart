@@ -60,7 +60,9 @@ class _PrevisionResultState extends State<PrevisionResult> {
         Center(
             child: ClipRRect(
               borderRadius: BorderRadiusGeometry.circular(16.0),
-              child: Card(
+              child: BackdropFilter(
+                  filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5), 
+                  child: Card(
                       color: Color.fromARGB(26, 255, 255, 255),
                       elevation: 4,
                       shape: RoundedRectangleBorder(
@@ -107,6 +109,7 @@ class _PrevisionResultState extends State<PrevisionResult> {
                           ],
                         )  
                       ),
+                ),
               ),
             )
           ),

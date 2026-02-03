@@ -33,6 +33,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "getLocationError": MessageLookupByLibrary.simpleMessage("获取您的位置时出错"),
     "getLocationTimeError": MessageLookupByLibrary.simpleMessage("获取您的位置耗时过长"),
     "history": MessageLookupByLibrary.simpleMessage("历史"),
+    "home": MessageLookupByLibrary.simpleMessage("主页"),
     "language": MessageLookupByLibrary.simpleMessage("语言"),
     "locationError": MessageLookupByLibrary.simpleMessage("无法获取您的位置"),
     "locationNotActive": MessageLookupByLibrary.simpleMessage("您的位置已禁用"),

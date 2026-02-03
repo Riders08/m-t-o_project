@@ -39,6 +39,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Отримання вашого місцезнаходження зайняло надто багато часу",
     ),
     "history": MessageLookupByLibrary.simpleMessage("Історія"),
+    "home": MessageLookupByLibrary.simpleMessage("Головна"),
     "language": MessageLookupByLibrary.simpleMessage("Мова"),
     "locationError": MessageLookupByLibrary.simpleMessage(
       "Не вдалося отримати ваше місцезнаходження",
