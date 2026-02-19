@@ -23,5 +23,6 @@
   "wallpaper" : "Achtergrond",
   "theme" : "Thema",
   "settings" : "Instellingen",
-  "home" : "Start"
+  "home" : "Start",
+  "actuallyPosition" : "Huidige Positie"
 }

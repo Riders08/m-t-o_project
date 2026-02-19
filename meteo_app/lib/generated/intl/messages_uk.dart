@@ -22,6 +22,9 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+    "actuallyPosition": MessageLookupByLibrary.simpleMessage(
+      "Поточне положення",
+    ),
     "appTitle": MessageLookupByLibrary.simpleMessage("Погода"),
     "autoriwedLocationError": MessageLookupByLibrary.simpleMessage(
       "Ви не надали дозвіл на доступ до вашого місцезнаходження.",

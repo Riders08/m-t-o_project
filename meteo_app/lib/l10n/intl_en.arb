@@ -23,5 +23,6 @@
   "wallpaper" : "Wallpaper",
   "theme" : "Theme",
   "settings" : "Settings",
-  "home" : "Home"
+  "home" : "Home",
+  "actuallyPosition" : "Current Position"
 }

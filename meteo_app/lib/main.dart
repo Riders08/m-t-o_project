@@ -1,28 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:meteo_app/models/savedPosition.dart';
-import 'package:meteo_app/services/cityResearch_services.dart';
-import 'package:meteo_app/services/notification_services.dart';
 
-import 'package:meteo_app/models/meteo.dart';
-import 'package:meteo_app/models/prevision.dart';
-import 'package:meteo_app/models/cityResearch.dart';
-
+import 'package:meteo_app/services/services.dart';
+import 'package:meteo_app/models/models.dart';
 import 'package:meteo_app/enum/MenuPage.dart';
-
-import 'package:meteo_app/services/outils_services.dart';
-import 'package:meteo_app/services/meteo_services.dart';
-import 'package:meteo_app/services/prevision_services.dart';
-
-import 'package:meteo_app/widgets/CityResearchWidgets.dart';
-import 'package:meteo_app/widgets/PressIcon.dart';
-import 'package:meteo_app/widgets/menu.dart';
-import 'package:meteo_app/widgets/PrevisionContent.dart';
-import 'package:meteo_app/widgets/WeatherContent.dart';
+import 'package:meteo_app/widgets/widget.dart';
+import 'package:meteo_app/pages/pages.dart';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:meteo_app/widgets/live_time.dart';
 import 'generated/l10n.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -55,6 +41,7 @@ class _MeteoAppState extends State<MeteoApp>  {
   bool _drawerOpen = false;
   MenuPage _currentPage = MenuPage.home;
 
+  List<SearchHistory> _history = [];
   SavedPosition? _savePos;
   bool _firstConnection = false;
   bool _connected = false;
@@ -130,8 +117,12 @@ class _MeteoAppState extends State<MeteoApp>  {
   }
 
   Future<void> _initLoad() async {
-    final data = await _outilsServices.loadMyPosition();
-    _savePos = data;
+    final dataPos = await _outilsServices.loadMyPosition();
+    _savePos = dataPos;
+    final dataHistory = await _outilsServices.loadSearchHistory();
+    setState(() {
+      _history = dataHistory.reversed.toList();
+    });
   }
 
   Future<void> _initNotification() async {
@@ -221,7 +212,10 @@ class _MeteoAppState extends State<MeteoApp>  {
       final lang = _outilsServices.langFromCountry(country);
       final resultMeteo = await _meteoServices.fetchMeteoByCoordinatesWithLang(ville.latitude, ville.longitude);
       final resultPrevision = await _previsionServices.fetchPrevisionByCoordinatesWithLang(ville.latitude, ville.longitude);
+      await _outilsServices.saveMyPosition(SavedPosition(latitude: ville.latitude, longitude: ville.longitude));
+      final update = await _outilsServices.loadSearchHistory();
       setState(() {
+        _history = update.reversed.toList();
         _savePos = SavedPosition(latitude: ville.latitude, longitude: ville.longitude);
         _prevision = resultPrevision;
         _meteo = resultMeteo;
@@ -230,7 +224,8 @@ class _MeteoAppState extends State<MeteoApp>  {
         _error = null;
         _appReady = true;
       });
-      _outilsServices.saveMyPosition(SavedPosition(latitude: ville.latitude, longitude: ville.longitude));
+      _outilsServices.saveSearchHistory(SearchHistory(cityName: ville.displayName, lat: ville.latitude, lon: ville.longitude, searchTime: DateTime.now()));
+      
     }catch(e){
       setState(() {
         _error = S.current.cityNotFound;
@@ -459,19 +454,31 @@ class _MeteoAppState extends State<MeteoApp>  {
         );
 
       case MenuPage.history:
-        return const Center(child: Text("History Page"));
+        return HistoryPage(
+          meteo: _meteo!,
+          listResearch: _history,
+          onTap: (item) async {
+            await _loadfromAlreadyPosition(
+              SavedPosition(
+                latitude: item.lat,
+                longitude: item.lon,
+              ),
+            );
+            _changePage(MenuPage.home);
+          },  
+        );
 
       case MenuPage.language:
-        return const Center(child: Text("Language Page"));
+        return LanguagePage();
 
       case MenuPage.settings:
-        return const Center(child: Text("Settings Page"));
+        return SettingsPage();
 
       case MenuPage.theme:
-        return const Center(child: Text("Theme Page"));
+        return ThemePage();
 
       case MenuPage.wallpaper:
-        return const Center(child: Text("Wallpaper Page"));
+        return WallpaperPage();
     }
   }
 }

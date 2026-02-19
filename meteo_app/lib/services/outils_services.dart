@@ -1,5 +1,6 @@
 import 'package:http/http.dart' as http;
-import 'package:meteo_app/models/savedPosition.dart';
+import 'dart:convert';
+import 'package:meteo_app/models/models.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:geocoding/geocoding.dart';
@@ -136,6 +137,23 @@ class OutilsServices {
     value.setDouble("lat", position.latitude);
   }
 
+  Future<void> saveSearchHistory(SearchHistory history) async {
+    final value = await SharedPreferences.getInstance();
+
+    final List<String> historyList = value.getStringList('searchHistory') ?? [];
+
+    historyList.removeWhere((research) {
+      final decode = SearchHistory.fromJson(jsonDecode(research));
+      return decode.cityName == history.cityName;
+    });//NOT DOUBLE
+
+    historyList.add(jsonEncode(history.toJson()));
+    if(historyList.length > 10){
+      historyList.removeAt(0);
+    }// limit => 10 
+    await value.setStringList('searchHistory', historyList);
+  }
+
   Future<SavedPosition?> loadMyPosition() async{
     final position = await SharedPreferences.getInstance();
     final lat = position.getDouble("lat");
@@ -145,6 +163,13 @@ class OutilsServices {
     }else{
       return SavedPosition(latitude: lat, longitude: lon);
     }
+  }
+
+  Future<List<SearchHistory>> loadSearchHistory() async {
+    final value = await SharedPreferences.getInstance();
+    final List<String> history = value.getStringList('searchHistory') ?? [];
+    return history.map((research) => SearchHistory.fromJson(jsonDecode(research))).toList();
+    
   }
 
   Future<bool> hasLocationPermission() async {

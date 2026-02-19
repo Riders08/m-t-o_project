@@ -23,5 +23,6 @@
   "wallpaper" : "Fond d'écran",
   "theme" : "Thème",
   "settings" : "Paramètres",
-  "home" : "Acceuil"
+  "home" : "Acceuil",
+  "actuallyPosition" : "Position Actuelle"
 }

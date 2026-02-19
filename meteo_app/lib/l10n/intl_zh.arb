@@ -23,5 +23,6 @@
   "wallpaper" : "壁纸",
   "theme" : "主题",
   "settings" : "设置",
-  "home" : "主页"
+  "home" : "主页",
+  "actuallyPosition" : "当前定位"
 }

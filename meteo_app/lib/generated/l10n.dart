@@ -193,6 +193,16 @@ class S {
   String get home {
     return Intl.message('Home', name: 'home', desc: '', args: []);
   }
+
+  /// `Current Position`
+  String get actuallyPosition {
+    return Intl.message(
+      'Current Position',
+      name: 'actuallyPosition',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

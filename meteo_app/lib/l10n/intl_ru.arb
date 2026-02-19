@@ -23,5 +23,6 @@
   "wallpaper" : "Обои",
   "theme" : "Тема",
   "settings" : "Настройки",
-  "home" : "Главная"
+  "home" : "Главная",
+  "actuallyPosition" : "Текущее положение"
 }

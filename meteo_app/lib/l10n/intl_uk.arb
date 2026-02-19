@@ -23,5 +23,6 @@
   "wallpaper" : "Шпалери",
   "theme" : "Тема",
   "settings" : "Налаштування",
-  "home" : "Головна"
+  "home" : "Головна",
+  "actuallyPosition" : "Поточне положення"
 }

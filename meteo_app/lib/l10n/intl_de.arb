@@ -23,5 +23,6 @@
   "wallpaper" : "Hintergrundbild",
   "theme" : "Design",
   "settings" : "Einstellungen",
-  "home" : "Startseite"
+  "home" : "Startseite",
+  "actuallyPosition" : "Aktuelle Position"
 }

@@ -23,5 +23,6 @@
   "wallpaper" : "Tapeta",
   "theme" : "Motyw",
   "settings" : "Ustawienia",
-  "home" : "Strona główna"
+  "home" : "Strona główna",
+  "actuallyPosition" : "Aktualna Pozycja"
 }

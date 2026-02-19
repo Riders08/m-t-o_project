@@ -22,6 +22,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+    "actuallyPosition": MessageLookupByLibrary.simpleMessage("当前定位"),
     "appTitle": MessageLookupByLibrary.simpleMessage("天气"),
     "autoriwedLocationError": MessageLookupByLibrary.simpleMessage(
       "您未授予访问位置的权限。",

@@ -23,5 +23,6 @@
   "wallpaper" : "壁紙",
   "theme" : "テーマ",
   "settings" : "設定",
-  "home" : "ホーム"
+  "home" : "ホーム",
+  "actuallyPosition" : "現在の位置"
 }
